@@ -1,17 +1,22 @@
 pipeline{
+
+    //Donde se va a ejecutar el Pipeline
     agent{
         label 'Slave_Mac'
     }
 
+    //Opciones específicas de Pipeline dentro del Pipeline
     options{
         buildDiscarder(logRotator(numToKeepStr: '3'))
         disableConcurrentBuilds()
     }
 
+    //Una sección que define las herramientas “preinstaladas” en Jenkins
     tools {
         jdk 'JDK8_Mac' //Preinstalada en la Configuración del Master
     }
 
+    //Aquí comienzan los “items” del Pipeline
     stages{
         stage('Checkout'){
             steps{
@@ -65,6 +70,7 @@ pipeline{
         success {
 			echo 'This will run only if successful'
             junit 'app/build/test-results/**/*.xml'
+            junit 'app/build/test-results/testDebugUnitTest/*.xml'
         }
 
     }
