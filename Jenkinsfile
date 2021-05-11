@@ -13,23 +13,6 @@ pipeline{
     }
 
     stages{
-        stage('Checkout'){
-            steps{
-                echo "------------>Checkout<------------"
-                checkout([
-                    $class: 'GitSCM',
-                    branches: [[name: '*/master']],
-                    doGenerateSubmoduleConfigurations: false,
-                    extensions: [],
-                    gitTool: 'Default',
-                    submoduleCfg: [],
-                    userRemoteConfigs: [[
-                        credentialsId: 'GitHub_jtrillos19',
-                        url:'https://github.com/jtrillos19/ADN'
-                    ]]
-                ])
-            }
-        }
 
         stage('Build') {
             steps{
