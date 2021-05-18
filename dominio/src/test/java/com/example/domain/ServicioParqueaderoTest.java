@@ -27,7 +27,7 @@ import static org.mockito.Mockito.when;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-public class ExampleUnitTest {
+public class ServicioParqueaderoTest {
 
     @Mock
     CarroRepositorio carroRepositorio;
@@ -41,11 +41,9 @@ public class ExampleUnitTest {
     Carro carro;
     Motocicleta motocicleta;
     String excepcionMsj;
-    Calendar fechaEntrada;
-    Calendar fechaSalida;
 
     @Before
-    public void inicializar() {
+    public void inicializarVariables() {
         carroRepositorio = Mockito.mock(CarroRepositorio.class);
         motocicletaRepositorio = Mockito.mock(MotocicletaRepositorio.class);
 
@@ -53,21 +51,6 @@ public class ExampleUnitTest {
         carro = new Carro("AQW-578", "carro");
         motocicleta = new Motocicleta("AQW-414", "motocicleta", (short) 650);
         excepcionMsj = "No hay cupo disponible";
-    }
-
-    @Before
-    public void inicializarFechas() throws ParseException {
-        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
-        //Fecha de entrada
-        fechaEntrada = Calendar.getInstance();
-        String fechaEntradaCadena = "18-05-2021 1:20:54";
-        Date fechaTemporalEntrada = formatoFecha.parse(fechaEntradaCadena);
-        fechaEntrada.setTime(fechaTemporalEntrada);
-        //Fecha de salida
-        fechaSalida = Calendar.getInstance();
-        String fechaSalidaCadena = "18-05-2021 5:30:54";
-        Date fechaTemporalSalida = formatoFecha.parse(fechaSalidaCadena);
-        fechaSalida.setTime(fechaTemporalSalida);
     }
 
     @Test
@@ -79,7 +62,7 @@ public class ExampleUnitTest {
         //Act
         resultadoEsperado = servicioParqueadero.validarPlaca(placa, diaViernes);
         //Asset
-        assertFalse(resultadoEsperado);
+        assertEquals(false, resultadoEsperado);
     }
 
     @Test
@@ -91,7 +74,7 @@ public class ExampleUnitTest {
         //Act
         resultadoEsperado = servicioParqueadero.validarPlaca(placa, diaLunes);
         //Asset
-        assertTrue(resultadoEsperado);
+        assertEquals(true, resultadoEsperado);
     }
 
     @Test
@@ -118,22 +101,6 @@ public class ExampleUnitTest {
             //Assert
             assertEquals(excepcionMsj, sinCupoExcepcion.getMessage());
         }
-    }
-
-    @Test
-    public void calcularHorasDeParqueo(){
-        //Act
-        int subTotal = CalculadoraPreciosParqueadero.calcularHorasDeParqueo(fechaEntrada,fechaSalida);
-        //Assert
-        assertEquals(5,subTotal);
-    }
-
-    @Test
-    public void valorSubTotalParqueoVehiculoExitoso(){
-        //Act
-        int subTotal = CalculadoraPreciosParqueadero.valorSubTotalParqueoVehiculo(fechaEntrada,fechaSalida,carro.obtenerTipo());
-        //Assert
-        assertEquals(5000,subTotal);
     }
 
 
