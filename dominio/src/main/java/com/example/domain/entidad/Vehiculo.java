@@ -2,39 +2,31 @@ package com.example.domain.entidad;
 
 import java.util.Calendar;
 
-public class Vehiculo {
+public abstract class Vehiculo {
 
-    private String placa;
-    private String tipo;
+    private final String placa;
+    private final String tipo;
     private Calendar fechaIngreso;
 
     public Vehiculo(String placa, String tipo) {
-        setPlaca(placa);
-        setTipo(tipo);
-        setFechaIngreso(Calendar.getInstance());
+        this.placa = placa;
+        this.tipo = tipo;
+        modificarFechaIngreso(Calendar.getInstance());
     }
 
-    public String getPlaca() {
+    public String obtenerPlaca() {
         return placa;
     }
 
-    public void setPlaca(String placa) {
-        this.placa = placa;
-    }
-
-    public String getTipo() {
+    public String obtenerTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
-    public Calendar getFechaIngreso() {
+    public Calendar obtenerFechaIngreso() {
         return fechaIngreso;
     }
 
-    public void setFechaIngreso(Calendar fechaIngreso) {
+    public void modificarFechaIngreso(Calendar fechaIngreso) {
         this.fechaIngreso = fechaIngreso;
     }
 }

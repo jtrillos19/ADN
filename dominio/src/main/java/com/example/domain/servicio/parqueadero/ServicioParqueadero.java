@@ -1,7 +1,6 @@
-package com.example.domain.servicio;
+package com.example.domain.servicio.parqueadero;
 
-import com.example.domain.Calculadora;
-import com.example.domain.Contantes;
+import com.example.domain.servicio.parqueadero.CalculadoraPreciosParqueadero;
 import com.example.domain.entidad.Carro;
 import com.example.domain.entidad.Motocicleta;
 import com.example.domain.entidad.Vehiculo;
@@ -14,15 +13,16 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import javax.inject.Inject;
+public class ServicioParqueadero {
 
-public class ParqueaderoServicio {
+    private final CarroRepositorio carroRepositorio;
+    private final MotocicletaRepositorio motocicletaRepositorio;
 
-    private CarroRepositorio carroRepositorio;
-    private MotocicletaRepositorio motocicletaRepositorio;
+    private final short CILINDRAJE_MOTOCICLETA = 500;
+    private final short EXCEDENTE_MOTOCICLETA = 2000;
 
-    @Inject
-    public ParqueaderoServicio(CarroRepositorio carroRepositorio, MotocicletaRepositorio motocicletaRepositorio) {
+
+    public ServicioParqueadero(CarroRepositorio carroRepositorio, MotocicletaRepositorio motocicletaRepositorio) {
         this.carroRepositorio = carroRepositorio;
         this.motocicletaRepositorio = motocicletaRepositorio;
     }
@@ -39,7 +39,7 @@ public class ParqueaderoServicio {
         int diaActual = Calendar.getInstance().getFirstDayOfWeek();
         if (cantidadVehiculos == 20) {
             throw new SinCupoExcepcion();
-        } else if (validarPlaca(carro.getPlaca(), diaActual)) {
+        } else if (validarPlaca(carro.obtenerPlaca(), diaActual)) {
             throw new PlacaNoPermitidaExcepcion();
         } else {
             carroRepositorio.guardarCarro(carro);
@@ -51,7 +51,7 @@ public class ParqueaderoServicio {
         int diaActual = Calendar.getInstance().getFirstDayOfWeek();
         if (cantidadVehiculos == 10) {
             throw new SinCupoExcepcion();
-        } else if (validarPlaca(motocicleta.getPlaca(), diaActual)) {
+        } else if (validarPlaca(motocicleta.obtenerPlaca(), diaActual)) {
             throw new PlacaNoPermitidaExcepcion();
         } else {
             motocicletaRepositorio.guardarMotocicleta(motocicleta);
@@ -71,18 +71,18 @@ public class ParqueaderoServicio {
     }
 
     public int valorTotalParqueaderoMotocicleta(Motocicleta motocicleta) {
-        Calendar fechaEntrada = motocicleta.getFechaIngreso();
+        Calendar fechaEntrada = motocicleta.obtenerFechaIngreso();
         Calendar fechaSalida = Calendar.getInstance();
-        int valorTotal = Calculadora.valorSubTotalParqueoVehiculo(fechaEntrada, fechaSalida, motocicleta.getTipo());
-        if (motocicleta.getCilindraje() > Contantes.CILINDRAJE_MOTOCICLETA) {
-            valorTotal += Contantes.EXCEDENTE_MOTOCICLETA;
+        int valorTotal = CalculadoraPreciosParqueadero.valorSubTotalParqueoVehiculo(fechaEntrada, fechaSalida, motocicleta.obtenerTipo());
+        if (motocicleta.obtenerCilindraje() > CILINDRAJE_MOTOCICLETA) {
+            valorTotal += EXCEDENTE_MOTOCICLETA;
         }
         return valorTotal;
     }
 
     public int valorTotalParqueaderoCarro(Carro carro) {
-        Calendar fechaEntrada = carro.getFechaIngreso();
+        Calendar fechaEntrada = carro.obtenerFechaIngreso();
         Calendar fechaSalida = Calendar.getInstance();
-        return Calculadora.valorSubTotalParqueoVehiculo(fechaEntrada, fechaSalida, carro.getTipo());
+        return CalculadoraPreciosParqueadero.valorSubTotalParqueoVehiculo(fechaEntrada, fechaSalida, carro.obtenerTipo());
     }
 }

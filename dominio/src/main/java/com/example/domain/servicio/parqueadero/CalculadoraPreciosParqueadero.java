@@ -1,8 +1,14 @@
-package com.example.domain;
+package com.example.domain.servicio.parqueadero;
 
 import java.util.Calendar;
 
-public class Calculadora {
+public class CalculadoraPreciosParqueadero {
+
+    private static final short HORA_CARRO = 1000;
+    private static final short DIA_CARRO = 8000;
+
+    private static final short HORA_MOTOCICLETA = 500;
+    private static final short DIA_MOTOCICLETA = 4000;
 
     public static int calcularHorasDeParqueo(Calendar fechaEntrada, Calendar fechaSalida) {
         float horaEnMillisegundos = 3600000;
@@ -12,11 +18,11 @@ public class Calculadora {
 
     public static int valorSubTotalParqueoVehiculo(Calendar fechaEntrada, Calendar fechaSalida, String tipoVehiculo) {
         int horasEnParqueadero = calcularHorasDeParqueo(fechaEntrada, fechaSalida);
-        int valorHoraVehiculo = Contantes.HORA_MOTOCICLETA;
-        int valorDiaVehiculo = Contantes.DIA_MOTOCICLETA;
+        int valorHoraVehiculo = HORA_MOTOCICLETA;
+        int valorDiaVehiculo = DIA_MOTOCICLETA;
         if (tipoVehiculo.equals("carro")) {
-            valorHoraVehiculo = Contantes.HORA_CARRO;
-            valorDiaVehiculo = Contantes.DIA_CARRO;
+            valorHoraVehiculo = HORA_CARRO;
+            valorDiaVehiculo = DIA_CARRO;
         }
         int valorSubTotal = 0;
         if (horasEnParqueadero < 9) {
