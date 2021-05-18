@@ -1,5 +1,7 @@
 plugins {
     id 'com.android.library'
+    id 'dagger.hilt.android.plugin'
+    id 'jacoco'
 }
 
 android {
@@ -25,6 +27,18 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+jacoco {
+    toolVersion = '0.8.5'
+}
+
+task jacocoTestReport(type: JacocoReport, dependsOn: "testDebugUnitTest") {
+    group = "Reporting"
+    description = "Generate Jacoco coverage reports after running tests."
+    reports {
+        xml.enabled = true
     }
 }
 
