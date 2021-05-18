@@ -12,7 +12,7 @@ import java.util.List;
 public class CarroTraductor {
 
     public static Carro pasarCarroDBaCarroDominio(CarroEntidad carroEntidad) throws ParseException {
-        Carro carro = new Carro(carroEntidad.placa, carroEntidad.tipo);
+        Carro carro = new Carro(carroEntidad.placa);
         Calendar fechaIngreso = Calendar.getInstance();
         SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
         fechaIngreso.setTime(formatoFecha.parse(String.valueOf(fechaIngreso)));
@@ -23,7 +23,6 @@ public class CarroTraductor {
     public static CarroEntidad pasarCarroDominioACarroDB(Carro carro) {
         CarroEntidad carroEntidad = new CarroEntidad();
         carroEntidad.modificarPlaca(carro.obtenerPlaca());
-        carroEntidad.modificarTipo(carro.obtenerTipo());
         carroEntidad.modificarFechaEntrada(carro.obtenerFechaIngreso().toString());
         return carroEntidad;
     }

@@ -5,7 +5,6 @@ import com.example.domain.entidad.Motocicleta;
 import com.example.domain.excepcion.SinCupoExcepcion;
 import com.example.domain.repositorio.CarroRepositorio;
 import com.example.domain.repositorio.MotocicletaRepositorio;
-import com.example.domain.servicio.parqueadero.CalculadoraPreciosParqueadero;
 import com.example.domain.servicio.parqueadero.ServicioParqueadero;
 
 import org.junit.Before;
@@ -14,10 +13,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
@@ -48,8 +44,8 @@ public class ServicioParqueaderoTest {
         motocicletaRepositorio = Mockito.mock(MotocicletaRepositorio.class);
 
         servicioParqueadero = new ServicioParqueadero(carroRepositorio, motocicletaRepositorio);
-        carro = new Carro("AQW-578", "carro");
-        motocicleta = new Motocicleta("AQW-414", "motocicleta", (short) 650);
+        carro = new Carro("AQW-578");
+        motocicleta = new Motocicleta("AQW-414", (short) 650);
         excepcionMsj = "No hay cupo disponible";
     }
 
