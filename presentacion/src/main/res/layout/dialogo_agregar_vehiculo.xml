@@ -7,38 +7,51 @@
 
     <LinearLayout
         android:id="@+id/contenedorTipoVehiculo"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/tv_tipo_vehiculo" />
 
-        <RadioGroup
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <RadioButton
-                android:id="@+id/tipoCarro"
-                android:layout_width="wrap_content"
+            <RadioGroup
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/rb_carro" />
+                android:orientation="horizontal">
 
-            <RadioButton
-                android:id="@+id/tipoMoto"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/rb_moto" />
-        </RadioGroup>
+                <RadioButton
+                    android:id="@+id/tipoCarro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:text="@string/rb_carro" />
+
+                <RadioButton
+                    android:id="@+id/tipoMoto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:text="@string/rb_moto" />
+
+            </RadioGroup>
+
+        </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/contenedorPlaca"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/contenedorTipoVehiculo"
         android:layout_marginBottom="10dp"
@@ -47,6 +60,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingRight="10dp"
             android:text="@string/tv_placa" />
 
         <EditText
@@ -56,21 +70,22 @@
             android:digits="qwertyuiopasdfghjklzxcvbnm 1234567890 QWERTYUIOPASDFGHJKLZXCVBNM"
             android:hint="@string/et_placa_oculta"
             android:inputType="text"
-            android:maxLength="10" />
+            android:maxLength="6" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/contenedorCilindraje"
-        android:layout_width="wrap_content"
-        android:visibility="gone"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/contenedorPlaca"
         android:layout_marginBottom="10dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingRight="10dp"
             android:text="@string/tv_cilindraje" />
 
         <EditText
@@ -79,28 +94,47 @@
             android:layout_height="wrap_content"
             android:hint="@string/et_cilindraje_oculto"
             android:inputType="number"
-            android:maxLength="10"
-            android:text="0" />
+            android:maxLength="4"
+            android:text="0"
+            android:textAlignment="center" />
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/contenedorCilindraje"
-        android:layout_centerInParent="true"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingTop="20dp">
 
-        <Button
-            android:id="@+id/btn_cancelar"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/btn_cancelar" />
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btn_agregar"
-            android:layout_width="wrap_content"
+            <Button
+                android:id="@+id/btn_cancelar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/btn_cancelar" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/btn_agregar" />
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btn_agregar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/btn_agregar" />
+        </LinearLayout>
+
     </LinearLayout>
 
 </RelativeLayout>
