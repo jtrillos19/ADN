@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/margen_vertical_actividad"
+    android:layout_marginBottom="@dimen/margen_vertical_actividad">
+
+    <LinearLayout
+        android:id="@+id/contentCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/margen_horizontal_actividad"
+        android:paddingTop="@dimen/margen_vertical_actividad"
+        android:paddingRight="@dimen/margen_horizontal_actividad"
+        android:paddingBottom="@dimen/margen_vertical_actividad">
+
+        <TextView
+            android:id="@+id/placa"
+            style="@style/TextAppearance.AppCompat.Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tool:text="SDF-V56" />
+
+        <LinearLayout
+            android:id="@+id/contentPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            tool:ignore="UseCompoundDrawables">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"
+                android:text="Fecha Ingreso: " />
+
+            <TextView
+                android:id="@+id/fechaIngreso"
+                style="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tool:text="Mon Mar 15 09:31:33 GMT-05:00 2021" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/contenedorCilindraje"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"
+                android:text="Cilindraje: " />
+
+            <TextView
+                android:id="@+id/cilingraje"
+                style="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tool:text="500" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/contentBtnViewPost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            tool:ignore="RtlHardcoded">
+
+            <Button
+                android:id="@+id/btn_view_post"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cobrar_parqueadero" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

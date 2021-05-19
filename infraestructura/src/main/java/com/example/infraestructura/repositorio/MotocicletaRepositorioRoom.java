@@ -35,7 +35,7 @@ public class MotocicletaRepositorioRoom implements MotocicletaRepositorio {
         ObtenerListaMotocicletasAsincrono obtenerListaMotocicletasAsincrono = new ObtenerListaMotocicletasAsincrono();
         try {
             List<MotocicletaEntidad> motocicletaDB = obtenerListaMotocicletasAsincrono.execute().get();
-            MotocicletaTraductor.pasarListaMotocicletaBDAListaMotocicletaDominio(motocicletaDB);
+            motocicletasDominio.addAll(MotocicletaTraductor.pasarListaMotocicletaBDAListaMotocicletaDominio(motocicletaDB));
         } catch (Exception e) {
             Log.e("Listar Motocicletas DB", e.getMessage());
         }
