@@ -35,8 +35,8 @@ jacoco {
 }
 
 task jacocoTestReport(type: JacocoReport, dependsOn: "testDebugUnitTest") {
-    group = "Reporting"
-    description = "Generate Jacoco coverage reports after running tests."
+    group = "Report Jacoco"
+    description = "Allows to Generate Jacoco coverage reports after running tests"
     reports {
         xml.enabled = true
     }

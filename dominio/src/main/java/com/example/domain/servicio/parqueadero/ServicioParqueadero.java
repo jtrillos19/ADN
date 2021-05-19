@@ -90,11 +90,4 @@ public class ServicioParqueadero {
         return carro.calcularValorTotalDeParqueadero(Calendar.getInstance());
     }
 
-    public int obtenerCantidadCarros(){
-        return carroRepositorio.obtenerCantidadCarros();
-    }
-
-    public int obtenerCantidadMotos() {
-        return motocicletaRepositorio.obtenerCantidadMotociletas();
-    }
 }

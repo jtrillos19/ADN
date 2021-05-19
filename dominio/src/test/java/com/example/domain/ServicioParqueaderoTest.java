@@ -31,21 +31,18 @@ public class ServicioParqueaderoTest {
     @Mock
     private MotocicletaRepositorio motocicletaRepositorio;
 
-    @Mock
     private ServicioParqueadero servicioParqueadero;
 
-    private Carro carro;
-    private Motocicleta motocicleta;
     private String excepcionSinCupoMsj;
 
     @Before
     public void inicializarVariables() {
         carroRepositorio = Mockito.mock(CarroRepositorio.class);
         motocicletaRepositorio = Mockito.mock(MotocicletaRepositorio.class);
-
         servicioParqueadero = new ServicioParqueadero(carroRepositorio, motocicletaRepositorio);
-        carro = new Carro("AQW-578");
-        motocicleta = new Motocicleta("AQW-414",  650);
+    }
+
+    private void iniciarExcepcion(){
         excepcionSinCupoMsj = "No hay cupo disponible";
     }
 
@@ -53,7 +50,7 @@ public class ServicioParqueaderoTest {
     public void validarPlacaExitosa() {
         //Arrange
         String placa = "AJT-S97";
-        int diaViernes = Calendar.FRIDAY;
+        int diaViernes = 5;
         boolean resultadoEsperado;
         //Act
         resultadoEsperado = servicioParqueadero.validarPlaca(placa, diaViernes);
@@ -65,7 +62,7 @@ public class ServicioParqueaderoTest {
     public void validarPlacaFallida() {
         //Arrange
         String placa = "AJT-S97";
-        int diaLunes = Calendar.MONDAY;
+        int diaLunes = 1;
         boolean resultadoEsperado;
         //Act
         resultadoEsperado = servicioParqueadero.validarPlaca(placa, diaLunes);
@@ -76,10 +73,13 @@ public class ServicioParqueaderoTest {
     @Test
     public void guardarCarroSinCupo() {
         //Arrange
+        Carro carro = new Carro("AQW-5R4");
+        iniciarExcepcion();
         when(carroRepositorio.obtenerCantidadCarros()).thenReturn((byte) carro.CANTIDAD_MAXIMA_EN_PARQUEADERO);
         //Act
         try {
             servicioParqueadero.guardarCarros(carro);
+            fail();
         } catch (SinCupoExcepcion sinCupoExcepcion) {
             //Assert
             assertEquals(excepcionSinCupoMsj, sinCupoExcepcion.getMessage());
@@ -89,10 +89,13 @@ public class ServicioParqueaderoTest {
     @Test
     public void guardarMotocicletaSinCupo() {
         //Arrange
+        Motocicleta motocicleta = new Motocicleta("AQW-5R4", 650);
+        iniciarExcepcion();
         when(motocicletaRepositorio.obtenerCantidadMotociletas()).thenReturn((byte) motocicleta.CANTIDAD_MAXIMA_EN_PARQUEADERO);
         //Act
         try {
             servicioParqueadero.guardarMotocicletas(motocicleta);
+            fail();
         } catch (SinCupoExcepcion sinCupoExcepcion) {
             //Assert
             assertEquals(excepcionSinCupoMsj, sinCupoExcepcion.getMessage());
