@@ -19,9 +19,14 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/vistaRecicladaVehiculos"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/margen_vertical_actividad" />
+            android:layout_height="match_parent" />
 
+        <Button
+            android:id="@+id/btnIngresarVehiculo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="Ingresar Vehiculo"/>
     </RelativeLayout>
 
 </LinearLayout>

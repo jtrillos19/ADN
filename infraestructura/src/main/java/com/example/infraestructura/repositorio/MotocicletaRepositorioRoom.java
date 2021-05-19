@@ -54,7 +54,7 @@ public class MotocicletaRepositorioRoom implements MotocicletaRepositorio {
     public void eliminarMotocicleta(Motocicleta motocicleta) {
         MotocicletaEntidad motocicletaEntidad = MotocicletaTraductor.pasarMotocicletaDominioAMotocicletaBD(motocicleta);
        BaseDatosAdministrador.EJECUTOR_ESCRITURA_BD.execute(()->{
-           motocicletaDao.eliminarMotocicleta(motocicletaEntidad);
+           motocicletaDao.eliminarMotocicleta(motocicletaEntidad.placa);
        });
     }
 

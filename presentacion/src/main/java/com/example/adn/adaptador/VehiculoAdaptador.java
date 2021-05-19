@@ -1,14 +1,17 @@
 package com.example.adn.adaptador;
 
+import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.adn.MainActivity;
 import com.example.adn.R;
 import com.example.domain.entidad.Motocicleta;
 import com.example.domain.entidad.Vehiculo;
@@ -18,9 +21,11 @@ import java.util.List;
 public class VehiculoAdaptador extends RecyclerView.Adapter<VehiculoAdaptador.VehiculoViewHolder> {
 
     private List<Vehiculo> vehiculos;
+    private Activity activity;
 
-    public VehiculoAdaptador(List<Vehiculo> vehiculos) {
+    public VehiculoAdaptador(List<Vehiculo> vehiculos, Activity actividad) {
         this.vehiculos = vehiculos;
+        this.activity = actividad;
     }
 
     @NonNull
@@ -46,6 +51,7 @@ public class VehiculoAdaptador extends RecyclerView.Adapter<VehiculoAdaptador.Ve
         private TextView fechaIngreso;
         private TextView cilindraje;
         private LinearLayout contenedorCilindraje;
+        private Button btnCobrar;
 
         public VehiculoViewHolder(@NonNull View vista) {
             super(vista);
@@ -53,6 +59,7 @@ public class VehiculoAdaptador extends RecyclerView.Adapter<VehiculoAdaptador.Ve
             fechaIngreso = vista.findViewById(R.id.fechaIngreso);
             contenedorCilindraje = vista.findViewById(R.id.contenedorCilindraje);
             cilindraje = vista.findViewById(R.id.cilingraje);
+            btnCobrar = vista.findViewById(R.id.btn_cobrar);
         }
 
         public void iniciarElementos(Vehiculo vehiculo) {
@@ -62,6 +69,14 @@ public class VehiculoAdaptador extends RecyclerView.Adapter<VehiculoAdaptador.Ve
                 Motocicleta motocicleta = (Motocicleta) vehiculo;
                 contenedorCilindraje.setVisibility(View.VISIBLE);
                 this.cilindraje.setText(String.valueOf(motocicleta.obtenerCilindraje()));
+            }
+            btnCobrar.setOnClickListener(v -> cobrarParqueadero(vehiculo));
+        }
+
+        public void cobrarParqueadero(Vehiculo vehiculo){
+            if (activity instanceof MainActivity){
+                MainActivity actividadPrincipal = (MainActivity) activity;
+                actividadPrincipal.cobrarParqueadero(vehiculo);
             }
         }
     }

@@ -18,8 +18,8 @@ public interface MotocicletaDao {
     @Query("SELECT * FROM motocicleta_entidad")
     List<MotocicletaEntidad> obtenerMotocicletas();
 
-    @Delete
-    void eliminarMotocicleta(MotocicletaEntidad motocicletaEntidad);
+    @Query("DELETE FROM motocicleta_entidad WHERE placa = :placaMotocicleta")
+    void eliminarMotocicleta(String placaMotocicleta);
 
     @Query("SELECT COUNT(*) FROM motocicleta_entidad")
     byte obtenerCantidadMotocicletas();
