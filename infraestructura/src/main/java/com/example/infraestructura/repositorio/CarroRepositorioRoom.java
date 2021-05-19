@@ -52,9 +52,10 @@ public class CarroRepositorioRoom implements CarroRepositorio {
 
     @Override
     public void eliminarCarro(Carro carro) {
-        EliminarCarroAsincrono eliminarCarroAsincrono = new EliminarCarroAsincrono();
         CarroEntidad carroEntidad = CarroTraductor.pasarCarroDominioACarroDB(carro);
-        eliminarCarroAsincrono.execute(carroEntidad);
+        BaseDatosAdministrador.EJECUTOR_ESCRITURA_BD.execute(() -> {
+            carroDao.eliminarCarro(carroEntidad);
+        });
     }
 
     @Override
@@ -63,8 +64,8 @@ public class CarroRepositorioRoom implements CarroRepositorio {
         ObtenerCantidadCarrosAsincrono obtenerCantidadCarrosAsincrono = new ObtenerCantidadCarrosAsincrono();
         try {
             cantidadCarros = obtenerCantidadCarrosAsincrono.execute().get();
-        } catch (Exception e) {
-            Log.e("BD total carros", e.getMessage());
+        } catch (Exception excepcion) {
+            Log.println(Log.ERROR, CarroRepositorioRoom.class.getName(), excepcion.getMessage());
         }
         return cantidadCarros;
     }

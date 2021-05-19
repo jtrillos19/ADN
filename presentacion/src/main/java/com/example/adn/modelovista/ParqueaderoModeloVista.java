@@ -24,7 +24,11 @@ public class ParqueaderoModeloVista extends ViewModel {
 
     private ServicioParqueadero servicioParqueadero;
 
-    private MutableLiveData<String> vehiculoGuardado;
+    private MutableLiveData<String> carroGuardado;
+
+    private MutableLiveData<String> carroEliminado;
+
+    private MutableLiveData<Integer> cantidadCarros;
 
     private Context contexto;
 
@@ -32,7 +36,6 @@ public class ParqueaderoModeloVista extends ViewModel {
     public ParqueaderoModeloVista(ServicioParqueadero servicioParqueadero, @ApplicationContext Context contexto) {
         this.contexto = contexto;
         this.servicioParqueadero = servicioParqueadero;
-        iniciarVariables();
         obtenerVehiculos();
     }
 
@@ -46,20 +49,36 @@ public class ParqueaderoModeloVista extends ViewModel {
         return vehiculos;
     }
 
-    public void iniciarVariables() {
-        if (vehiculoGuardado == null) {
-            vehiculoGuardado = new MutableLiveData<>();
-        }
-    }
 
     public LiveData<String> guardarCarro(Carro carro) {
+        if (carroGuardado == null)
+            carroGuardado = new MutableLiveData<>();
         try {
             servicioParqueadero.guardarCarros(carro);
-            vehiculoGuardado.setValue(contexto.getString(R.string.guardado_exitoso));
-        } catch (Exception exception) {
-            vehiculoGuardado.setValue(exception.getMessage());
+            carroGuardado.setValue(contexto.getString(R.string.guardado_exitoso));
+        } catch (Exception excepcion) {
+            carroGuardado.setValue(excepcion.getMessage());
         }
-        return vehiculoGuardado;
+        return carroGuardado;
+    }
+
+    public LiveData<String> eliminarCarro(Carro carro) {
+        if (carroEliminado == null)
+            carroEliminado = new MutableLiveData<>();
+        try {
+            servicioParqueadero.eliminarCarro(carro);
+            carroEliminado.setValue(contexto.getString(R.string.eliminado_exitoso));
+        } catch (Exception excepcion) {
+            carroEliminado.setValue(excepcion.getMessage());
+        }
+        return carroEliminado;
+    }
+
+    public LiveData<Integer> obtenerCantidadCarros() {
+        if (cantidadCarros == null)
+            cantidadCarros = new MutableLiveData<>();
+        cantidadCarros.setValue(servicioParqueadero.obtenerCantidadCarros());
+        return cantidadCarros;
     }
 
 }
