@@ -16,18 +16,18 @@ pipeline{
     //Aquí comienzan los “items” del Pipeline
     stages{
 
+        stage('Unit Tests') {
+            steps{
+                echo "------------>compile & Unit Tests<------------"
+                sh './gradlew --b build.gradle test --scan'
+                sh './gradlew --b build.gradle jacocoTestReport'
+            }
+        }
         stage('Build') {
             steps{
                 echo "------------>Build<------------"
-                sh './gradlew --b ./build.gradle build -x test'
-            }
-        }
-
-        stage('Compile & Unit Tests') {
-            steps{
-                echo "------------>compile & Unit Tests<------------"
-                sh 'chmod +x gradlew'
-                sh './gradlew --b ./build.gradle test'
+                //Construir sin tarea test que se ejecutó previamente
+                sh './gradlew --b build.gradle build -x test'
             }
         }
 
@@ -35,7 +35,7 @@ pipeline{
             steps{
                 echo '------------>Análisis de código estático<------------'
                 withSonarQubeEnv('Sonar') {
-                    sh "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner"
+                    sh "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner -Dproject.settings=sonar-project.properties"
                 }
             }
         }
@@ -49,7 +49,7 @@ pipeline{
 
         success {
 			echo 'This will run only if successful'
-            junit 'app/build/test-results/**/*.xml'
+            junit '**/test-results/testDebugUnitTest/*.xml'
         }
 
     }
