@@ -23,7 +23,6 @@ import com.example.domain.entidad.Motocicleta;
 import com.example.domain.entidad.Vehiculo;
 
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
@@ -42,8 +41,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         iniciarElementos();
         btnIngresarVehiculo.setOnClickListener(v -> crearDialogoGuardarVehiculo());
-        parqueaderoModeloVista.obtenerListaVehiculos().observe(this,this::actualizarAdaptador);
+        parqueaderoModeloVista.obtenerListaVehiculos().observe(this, this::actualizarAdaptador);
     }
+
     private void iniciarElementos() {
         vistaReciclada = findViewById(R.id.vistaRecicladaVehiculos);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -96,31 +96,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void cobrarParqueadero(Vehiculo vehiculo) {
-        AtomicInteger valorTotalPagar = new AtomicInteger();
-        if (vehiculo instanceof Carro) {
-            Carro carro = (Carro) vehiculo;
-            parqueaderoModeloVista.calcularValorTotalPagarCarro(carro).observe(this, valorPagar -> {
-                valorTotalPagar.set(valorPagar);
-            });
-        } else {
-            Motocicleta motocicleta = (Motocicleta) vehiculo;
-            parqueaderoModeloVista.calcularValorTotalPagarMoto(motocicleta).observe(this, valorPagar -> {
-                valorTotalPagar.set(valorPagar);
-            });
-        }
-        Toast.makeText(this, "Total a Pagar: " + valorTotalPagar.get(), Toast.LENGTH_SHORT).show();
-        vistaReciclada.getAdapter().notifyDataSetChanged();
+        parqueaderoModeloVista.calcularValorTotalPagarVehiculo(vehiculo).observe(this, totalPagar -> {
+            Toast.makeText(this, "Total a Pagar: " + totalPagar, Toast.LENGTH_SHORT).show();
+            vistaReciclada.getAdapter().notifyDataSetChanged();
+        });
     }
 
     private void guardarVehiculo(Vehiculo vehiculo, AlertDialog dialogo) {
-        if (vehiculo instanceof Carro) {
-            Carro carro = (Carro) vehiculo;
-            parqueaderoModeloVista.guardarCarro(carro).observe(this, v -> Toast.makeText(this, v, Toast.LENGTH_SHORT).show());
-        } else {
-            Motocicleta motocicleta = (Motocicleta) vehiculo;
-            parqueaderoModeloVista.guardarMotocicleta(motocicleta).observe(this, v -> Toast.makeText(this, v, Toast.LENGTH_SHORT).show());
-        }
-        dialogo.dismiss();
-        vehiculoAdaptador.notifyDataSetChanged();
+        parqueaderoModeloVista.guardarVehiculo(vehiculo).observe(this, vehiculoGuardado -> {
+            Toast.makeText(this, vehiculoGuardado, Toast.LENGTH_SHORT).show();
+            dialogo.dismiss();
+            vehiculoAdaptador.notifyDataSetChanged();
+        });
     }
 }
