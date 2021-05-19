@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         iniciarElementos();
-        btnIngresarVehiculo.setOnClickListener(v -> crearDialogoGuardarVehiculo());
+        btnIngresarVehiculo.setOnClickListener(v -> DialogoVehiculo.crearDialogoGuardarVehiculo(this).show());
         parqueaderoModeloVista.obtenerListaVehiculos().observe(this, this::actualizarAdaptador);
     }
 
@@ -51,43 +51,6 @@ public class MainActivity extends AppCompatActivity {
         vistaReciclada.setLayoutManager(linearLayoutManager);
         btnIngresarVehiculo = findViewById(R.id.btnIngresarVehiculo);
         parqueaderoModeloVista = new ViewModelProvider(this).get(ParqueaderoModeloVista.class);
-    }
-
-    private void crearDialogoGuardarVehiculo() {
-        AlertDialog.Builder dialogo = new AlertDialog.Builder(this);
-        LayoutInflater disenio = this.getLayoutInflater();
-        View vista = disenio.inflate(R.layout.dialogo_agregar_vehiculo, null);
-        dialogo.setView(vista);
-        LinearLayout contenedorCilindraje = vista.findViewById(R.id.contenedorCilindraje);
-        RadioButton tipoCarro = vista.findViewById(R.id.tipoCarro);
-        RadioButton tipoMoto = vista.findViewById(R.id.tipoMoto);
-        EditText placa = vista.findViewById(R.id.placa);
-        EditText cilindraje = vista.findViewById(R.id.cilindraje);
-        Button btnAgregar = vista.findViewById(R.id.btn_agregar);
-        Button btnCancelar = vista.findViewById(R.id.btn_cancelar);
-        AlertDialog dialogoTmp = dialogo.create();
-        dialogoTmp.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-        dialogoTmp.show();
-        tipoMoto.setOnClickListener(v -> contenedorCilindraje.setVisibility(View.VISIBLE));
-        tipoCarro.setOnClickListener(v -> {
-            if (contenedorCilindraje.getVisibility() == View.VISIBLE)
-                contenedorCilindraje.setVisibility(View.GONE);
-        });
-        btnCancelar.setOnClickListener(v -> dialogoTmp.dismiss());
-        btnAgregar.setOnClickListener(v -> {
-            Vehiculo vehiculo = crearVehiculo(tipoMoto, placa.getText().toString(), Integer.parseInt(cilindraje.getText().toString()));
-            guardarVehiculo(vehiculo, dialogoTmp);
-        });
-    }
-
-    private Vehiculo crearVehiculo(RadioButton rdMoto, String placa, int cilindraje) {
-        Vehiculo vehiculo;
-        if (rdMoto.isChecked()) {
-            vehiculo = new Motocicleta(placa, cilindraje);
-        } else {
-            vehiculo = new Carro(placa);
-        }
-        return vehiculo;
     }
 
     private void actualizarAdaptador(List<Vehiculo> vehiculos) {
@@ -102,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void guardarVehiculo(Vehiculo vehiculo, AlertDialog dialogo) {
+    public void guardarVehiculo(Vehiculo vehiculo, AlertDialog dialogo) {
         parqueaderoModeloVista.guardarVehiculo(vehiculo).observe(this, vehiculoGuardado -> {
             Toast.makeText(this, vehiculoGuardado, Toast.LENGTH_SHORT).show();
             dialogo.dismiss();
