@@ -3,7 +3,7 @@ buildscript {
     ext.appCompatVersion = '1.2.0'
     ext.lifecycleVersion = '2.2.0'
     ext.roomVersion = '2.2.5'
-    ext.jacocoVersion = '0.8.5'
+    ext.jacocoVersion = '0.8.1'
 
     repositories {
         google()

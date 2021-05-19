@@ -7,7 +7,7 @@
     android:layout_marginBottom="@dimen/margen_vertical_actividad">
 
     <LinearLayout
-        android:id="@+id/contentCard"
+        android:id="@+id/contenedorVehiculo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -68,11 +68,11 @@
         </LinearLayout>
 
         <RelativeLayout
-            android:id="@+id/contentBtnViewPost"
+            android:id="@+id/contentBtnCobrar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            tool:ignore="RtlHardcoded">
+            >
 
             <Button
                 android:id="@+id/btn_cobrar"
