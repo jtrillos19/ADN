@@ -2,11 +2,9 @@ package com.example.adn;
 
 import android.content.Context;
 
-import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner;
 import androidx.test.platform.app.InstrumentationRegistry;
 
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -20,8 +18,6 @@ import static org.junit.Assert.*;
 @RunWith(AndroidJUnit4ClassRunner.class)
 public class ExampleInstrumentedTest {
 
-    @Rule
-    private ActivityScenarioRule actividad = new ActivityScenarioRule(MainActivity.class);
 
     @Test
     public void useAppContext() {

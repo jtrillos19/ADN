@@ -34,6 +34,16 @@ jacoco {
     toolVersion = '0.8.5'
 }
 
+tasks.withType(Test) {
+    jacoco.includeNoLocationClasses = true
+    testLogging {
+        exceptionFormat "full"
+        events "skipped", "passed", "failed"
+        showStandardStreams true
+    }
+    finalizedBy(jacocoTestReport)
+}
+
 task jacocoTestReport(type: JacocoReport, dependsOn: "testDebugUnitTest") {
     group = "Report Jacoco"
     description = "Allows to Generate Jacoco coverage reports after running tests"
