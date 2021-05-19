@@ -26,17 +26,17 @@ import static org.mockito.Mockito.when;
 public class ServicioParqueaderoTest {
 
     @Mock
-    CarroRepositorio carroRepositorio;
+    private CarroRepositorio carroRepositorio;
 
     @Mock
-    MotocicletaRepositorio motocicletaRepositorio;
+    private MotocicletaRepositorio motocicletaRepositorio;
 
     @Mock
-    ServicioParqueadero servicioParqueadero;
+    private ServicioParqueadero servicioParqueadero;
 
-    Carro carro;
-    Motocicleta motocicleta;
-    String excepcionMsj;
+    private Carro carro;
+    private Motocicleta motocicleta;
+    private String excepcionSinCupoMsj;
 
     @Before
     public void inicializarVariables() {
@@ -46,7 +46,7 @@ public class ServicioParqueaderoTest {
         servicioParqueadero = new ServicioParqueadero(carroRepositorio, motocicletaRepositorio);
         carro = new Carro("AQW-578");
         motocicleta = new Motocicleta("AQW-414", (short) 650);
-        excepcionMsj = "No hay cupo disponible";
+        excepcionSinCupoMsj = "No hay cupo disponible";
     }
 
     @Test
@@ -76,26 +76,26 @@ public class ServicioParqueaderoTest {
     @Test
     public void guardarCarroSinCupo() {
         //Arrange
-        when(carroRepositorio.obtenerCantidadCarros()).thenReturn((byte) 20);
+        when(carroRepositorio.obtenerCantidadCarros()).thenReturn((byte) carro.CANTIDAD_MAXIMA_EN_PARQUEADERO);
         //Act
         try {
             servicioParqueadero.guardarCarros(carro);
         } catch (SinCupoExcepcion sinCupoExcepcion) {
             //Assert
-            assertEquals(excepcionMsj, sinCupoExcepcion.getMessage());
+            assertEquals(excepcionSinCupoMsj, sinCupoExcepcion.getMessage());
         }
     }
 
     @Test
     public void guardarMotocicletaSinCupo() {
         //Arrange
-        when(motocicletaRepositorio.obtenerCantidadMotociletas()).thenReturn((byte) 10);
+        when(motocicletaRepositorio.obtenerCantidadMotociletas()).thenReturn((byte) motocicleta.CANTIDAD_MAXIMA_EN_PARQUEADERO);
         //Act
         try {
             servicioParqueadero.guardarMotocicletas(motocicleta);
         } catch (SinCupoExcepcion sinCupoExcepcion) {
             //Assert
-            assertEquals(excepcionMsj, sinCupoExcepcion.getMessage());
+            assertEquals(excepcionSinCupoMsj, sinCupoExcepcion.getMessage());
         }
     }
 

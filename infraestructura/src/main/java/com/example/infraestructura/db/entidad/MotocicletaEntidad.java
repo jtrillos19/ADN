@@ -13,10 +13,7 @@ public class MotocicletaEntidad {
 
     @ColumnInfo(name = "placa")
     public String placa;
-
-    @ColumnInfo(name = "tipo")
-    public String tipo;
-
+    
     @ColumnInfo(name = "fechaEntrada")
     public String fechaEntrada;
 

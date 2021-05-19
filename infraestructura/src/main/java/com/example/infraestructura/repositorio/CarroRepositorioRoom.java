@@ -32,45 +32,71 @@ public class CarroRepositorioRoom implements CarroRepositorio {
     @Override
     public List<Carro> obtenerCarros() {
         List<Carro> carrosDominio = new ArrayList<>();
-        ObtenerCarrosAsyncTask obtenerCarrosAsyncTask = new ObtenerCarrosAsyncTask();
+        ObtenerListaCarrosAsincrono obtenerListaCarrosAsincrono = new ObtenerListaCarrosAsincrono();
         try {
-            List<CarroEntidad> carrosDB = obtenerCarrosAsyncTask.execute().get();
+            List<CarroEntidad> carrosDB = obtenerListaCarrosAsincrono.execute().get();
             CarroTraductor.pasarListaCarroDominioAListaCarroDB(carrosDB);
         } catch (Exception e) {
-            Log.e("Consulta DB Carro", e.getMessage());
+            Log.e("Listar Carros DB", e.getMessage());
         }
         return carrosDominio;
     }
 
     @Override
     public void guardarCarro(Carro carro) {
-        AgregarCarrosAsyncTask agregarCarrosAsyncTask = new AgregarCarrosAsyncTask();
+        AgregarCarrosAsincrono agregarCarrosAsincrono = new AgregarCarrosAsincrono();
         CarroEntidad carroEntidad = CarroTraductor.pasarCarroDominioACarroDB(carro);
-        agregarCarrosAsyncTask.execute(carroEntidad);
+        agregarCarrosAsincrono.execute(carroEntidad);
     }
 
     @Override
     public void eliminarCarro(Carro carro) {
-
+        EliminarCarroAsincrono eliminarCarroAsincrono = new EliminarCarroAsincrono();
+        CarroEntidad carroEntidad = CarroTraductor.pasarCarroDominioACarroDB(carro);
+        eliminarCarroAsincrono.execute(carroEntidad);
     }
 
     @Override
     public byte obtenerCantidadCarros() {
-        return 0;
+        byte cantidadCarros = 0;
+        ObtenerCantidadCarrosAsincrono obtenerCantidadCarrosAsincrono = new ObtenerCantidadCarrosAsincrono();
+        try {
+            cantidadCarros = obtenerCantidadCarrosAsincrono.execute().get();
+        }catch (Exception e){
+            Log.e("BD total carros", e.getMessage());
+        }
+        return cantidadCarros;
     }
 
-    class ObtenerCarrosAsyncTask extends AsyncTask<Void, Void, List<CarroEntidad>> {
+    class ObtenerListaCarrosAsincrono extends AsyncTask<Void, Void, List<CarroEntidad>> {
         @Override
         protected List<CarroEntidad> doInBackground(Void... voids) {
             return carroDao.obtenerCarros();
         }
     }
 
-    class AgregarCarrosAsyncTask extends AsyncTask<CarroEntidad, Void, Void> {
+    class AgregarCarrosAsincrono extends AsyncTask<CarroEntidad, Void, Void> {
         @Override
         protected Void doInBackground(CarroEntidad... carroEntidades) {
             carroDao.agregarCarro(carroEntidades[0]);
             return null;
+        }
+    }
+
+    class EliminarCarroAsincrono extends AsyncTask<CarroEntidad,Void,Void>{
+
+        @Override
+        protected Void doInBackground(CarroEntidad... carroEntidades) {
+            carroDao.eliminarCarro(carroEntidades[0]);
+            return null;
+        }
+    }
+
+    class ObtenerCantidadCarrosAsincrono extends AsyncTask<Void,Void,Byte>{
+
+        @Override
+        protected Byte doInBackground(Void... voids) {
+            return carroDao.obtenerCantidadCarros();
         }
     }
 }
