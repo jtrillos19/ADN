@@ -16,14 +16,6 @@ pipeline{
     //Aquí comienzan los “items” del Pipeline
     stages{
 
-
-        stage('Unit Tests') {
-            steps{
-                echo "------------>compile & Unit Tests<------------"
-                sh './gradlew --b build.gradle test --scan'
-                /*sh './gradlew --b build.gradle jacocoTestReport'*/
-            }
-        }
         stage('Build') {
             steps{
                 echo "------------>Build<------------"
@@ -31,6 +23,14 @@ pipeline{
                 sh './gradlew --b build.gradle build -x test'
             }
         }
+
+         stage('Unit Tests') {
+            steps{
+               echo "------------>compile & Unit Tests<------------"
+               sh './gradlew --b build.gradle test --scan'
+               sh './gradlew --b build.gradle jacocoTestReport'
+            }
+         }
 
         stage('Static Code Analysis') {
             steps{

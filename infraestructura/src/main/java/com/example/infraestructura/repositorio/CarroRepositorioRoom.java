@@ -36,17 +36,16 @@ public class CarroRepositorioRoom implements CarroRepositorio {
         try {
             List<CarroEntidad> carrosDB = obtenerListaCarrosAsincrono.execute().get();
             CarroTraductor.pasarListaCarroDominioAListaCarroDB(carrosDB);
-        } catch (Exception e) {
-            Log.e("Listar Carros DB", e.getMessage());
+        } catch (Exception exception) {
+            Log.println(Log.ERROR, CarroRepositorioRoom.class.getName(), exception.getMessage());
         }
         return carrosDominio;
     }
 
     @Override
     public void guardarCarro(Carro carro) {
-        AgregarCarrosAsincrono agregarCarrosAsincrono = new AgregarCarrosAsincrono();
         CarroEntidad carroEntidad = CarroTraductor.pasarCarroDominioACarroDB(carro);
-        agregarCarrosAsincrono.execute(carroEntidad);
+        carroDao.agregarCarro(carroEntidad);
     }
 
     @Override
@@ -72,14 +71,6 @@ public class CarroRepositorioRoom implements CarroRepositorio {
         @Override
         protected List<CarroEntidad> doInBackground(Void... voids) {
             return carroDao.obtenerCarros();
-        }
-    }
-
-    class AgregarCarrosAsincrono extends AsyncTask<CarroEntidad, Void, Void> {
-        @Override
-        protected Void doInBackground(CarroEntidad... carroEntidades) {
-            carroDao.agregarCarro(carroEntidades[0]);
-            return null;
         }
     }
 
