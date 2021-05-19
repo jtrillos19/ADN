@@ -20,23 +20,22 @@ pipeline{
             steps{
                 echo "------------>Build<------------"
                 //Construir sin tarea test que se ejecutó previamente
-                sh './gradlew --b build.gradle build -x test'
+                sh './gradlew build -x test'
             }
         }
 
-         stage('Unit Tests') {
+        stage('Unit Tests') {
             steps{
                echo "------------>compile & Unit Tests<------------"
                sh './gradlew --b build.gradle test --scan'
-               sh './gradlew --b build.gradle jacocoTestReport'
             }
-         }
+        }
 
         stage('Static Code Analysis') {
             steps{
                 echo '------------>Análisis de código estático<------------'
                 withSonarQubeEnv('Sonar') {
-                    sh "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner -Dproject.settings=sonar-project.properties"
+                sh "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner"
                 }
             }
         }
