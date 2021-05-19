@@ -12,27 +12,21 @@ import static org.junit.Assert.assertEquals;
 
 public class VehiculoTest {
 
-    private Calendar fechaIngreso;
-    private Calendar fechaSalida;
 
-    @Before
-    public void inicializarFechas() throws ParseException {
+    @Test
+    public void calcularTotalHorasEnParqueadero_diferancia5Horas_exitoso() throws ParseException {
+        //Arrange
         SimpleDateFormat formatoFecha = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
         //Fecha de entrada
-        fechaIngreso = Calendar.getInstance();
-        String fechaIngresoFormato = "09-03-2021 6:20:56";
+        Calendar fechaIngreso = Calendar.getInstance();
+        String fechaIngresoFormato = "19-05-2021 6:20:56";
         Date fechaIngresoTemporal = formatoFecha.parse(fechaIngresoFormato);
         fechaIngreso.setTime(fechaIngresoTemporal);
         //Fecha de salida
-        fechaSalida = Calendar.getInstance();
-        String fechaSalidaFormato = "09-03-2021 10:30:56";
+        Calendar fechaSalida = Calendar.getInstance();
+        String fechaSalidaFormato = "19-05-2021 10:30:56";
         Date fechaSalidaTemporal = formatoFecha.parse(fechaSalidaFormato);
         fechaSalida.setTime(fechaSalidaTemporal);
-    }
-
-    @Test
-    public void calcularTotalHorasEnParqueadero_diferancia5Horas_exitoso() {
-        //Arrange
         Vehiculo vehiculo = new Vehiculo("AQS-JU8");
         vehiculo.modificarFechaIngreso(fechaIngreso);
         //Act

@@ -12,32 +12,57 @@ import static org.junit.Assert.assertEquals;
 
 public class CarroTest {
 
-    private Calendar fechaIngreso;
-    private Calendar fechaSalida;
+    private SimpleDateFormat formatoFecha;
 
     @Before
-    public void inicializarFechas() throws ParseException {
-        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
-        //Fecha de entrada
-        fechaIngreso = Calendar.getInstance();
-        String fechaIngresoFormato = "09-03-2021 6:20:56";
-        Date fechaIngresoTemporal = formatoFecha.parse(fechaIngresoFormato);
+    public void iniciarFormatoFecha(){
+        formatoFecha = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+    }
+
+    private Calendar fechaEntrada(String fechaEntrada) throws ParseException {
+        Calendar fechaIngreso = Calendar.getInstance();
+        Date fechaIngresoTemporal = formatoFecha.parse(fechaEntrada);
         fechaIngreso.setTime(fechaIngresoTemporal);
-        //Fecha de salida
-        fechaSalida = Calendar.getInstance();
-        String fechaSalidaFormato = "09-03-2021 10:30:56";
-        Date fechaSalidaTemporal = formatoFecha.parse(fechaSalidaFormato);
-        fechaSalida.setTime(fechaSalidaTemporal);
+        return fechaIngreso;
+    }
+
+    private Calendar fechaSalida(String fechaSalida) throws ParseException {
+        Calendar fechaIngreso = Calendar.getInstance();
+        Date fechaIngresoTemporal = formatoFecha.parse(fechaSalida);
+        fechaIngreso.setTime(fechaIngresoTemporal);
+        return fechaIngreso;
     }
 
     @Test
-    public void calcularValorTotalDeParqueadero_carroCon5HorasDeParqueo_exitoso() {
+    public void calcularValorTotalDeParqueadero_carroCon5HorasDeParqueo_exitoso() throws ParseException {
         //Arrange
         Carro carro = new Carro("ASW-KJ8");
-        carro.modificarFechaIngreso(fechaIngreso);
+        carro.modificarFechaIngreso(fechaEntrada("19-05-2021 6:20:56"));
         //Act
-        int subTotal = carro.calcularValorTotalDeParqueadero(fechaSalida);
+        int subTotal = carro.calcularValorTotalDeParqueadero(fechaSalida("19-05-2021 10:30:56"));
         //Assert
         assertEquals(5000, subTotal);
+    }
+
+    @Test
+    public void calcularValorTotalDeParqueadero_24horasDeParqueo_exitoso() throws ParseException {
+        //Arrange
+        Carro carro = new Carro("ASW-KJ8");
+        carro.modificarFechaIngreso(fechaEntrada("19-05-2021 10:30:56"));
+        //Act
+        int subTotal = carro.calcularValorTotalDeParqueadero(fechaSalida("20-05-2021 10:30:56"));
+        //Assert
+        assertEquals(8000, subTotal);
+    }
+
+    @Test
+    public void calcularValorTotalDeParqueadero_34horasDeParqueo_exitoso() throws ParseException {
+        //Arrange
+        Carro carro = new Carro("ASW-KJ8");
+        carro.modificarFechaIngreso(fechaEntrada("19-05-2021 1:30:56"));
+        //Act
+        int subTotal = carro.calcularValorTotalDeParqueadero(fechaSalida("20-05-2021 11:30:56"));
+        //Assert
+        assertEquals(16000, subTotal);
     }
 }

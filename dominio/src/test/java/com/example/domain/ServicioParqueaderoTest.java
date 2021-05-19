@@ -2,6 +2,7 @@ package com.example.domain;
 
 import com.example.domain.entidad.Carro;
 import com.example.domain.entidad.Motocicleta;
+import com.example.domain.excepcion.PlacaNoPermitidaExcepcion;
 import com.example.domain.excepcion.SinCupoExcepcion;
 import com.example.domain.repositorio.CarroRepositorio;
 import com.example.domain.repositorio.MotocicletaRepositorio;
@@ -13,7 +14,10 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
@@ -33,7 +37,6 @@ public class ServicioParqueaderoTest {
 
     private ServicioParqueadero servicioParqueadero;
 
-    private String excepcionSinCupoMsj;
 
     @Before
     public void inicializarVariables() {
@@ -42,14 +45,22 @@ public class ServicioParqueaderoTest {
         servicioParqueadero = new ServicioParqueadero(carroRepositorio, motocicletaRepositorio);
     }
 
-    private void iniciarExcepcion(){
-        excepcionSinCupoMsj = "No hay cupo disponible";
+    private String iniciarExcepcionSinCupo(){
+        return "No hay cupo disponible";
+    }
+
+    private Calendar fechaEntrada() throws ParseException {
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+        Calendar fechaIngreso = Calendar.getInstance();
+        Date fechaIngresoTemporal = formatoFecha.parse("08-03-2021 6:20:56");
+        fechaIngreso.setTime(fechaIngresoTemporal);
+        return fechaIngreso;
     }
 
     @Test
-    public void validarPlacaExitosa() {
+    public void validarPlaca_placaIniciadaEnAyElDiaViernes_exitoso() {
         //Arrange
-        String placa = "AJT-S97";
+        String placa = "ASD-J87";
         int diaViernes = 5;
         boolean resultadoEsperado;
         //Act
@@ -59,46 +70,75 @@ public class ServicioParqueaderoTest {
     }
 
     @Test
-    public void validarPlacaFallida() {
+    public void validarPlaca_placaIniciadaEnAyElDiaLunes_exitoso() {
         //Arrange
-        String placa = "AJT-S97";
+        String placa = "ASD-J87";
         int diaLunes = 1;
         boolean resultadoEsperado;
         //Act
         resultadoEsperado = servicioParqueadero.validarPlaca(placa, diaLunes);
         //Asset
         assertEquals(true, resultadoEsperado);
+
     }
 
     @Test
-    public void guardarCarroSinCupo() {
+    public void guardarCarro_sinCupoParaIngresar_exitoso() {
         //Arrange
         Carro carro = new Carro("AQW-5R4");
-        iniciarExcepcion();
         when(carroRepositorio.obtenerCantidadCarros()).thenReturn((byte) carro.CANTIDAD_MAXIMA_EN_PARQUEADERO);
         //Act
         try {
             servicioParqueadero.guardarCarros(carro);
-            fail();
-        } catch (SinCupoExcepcion sinCupoExcepcion) {
+        } catch (SinCupoExcepcion excepcion) {
             //Assert
-            assertEquals(excepcionSinCupoMsj, sinCupoExcepcion.getMessage());
+            assertEquals(iniciarExcepcionSinCupo(), excepcion.getMessage());
         }
     }
 
     @Test
-    public void guardarMotocicletaSinCupo() {
+    public void guardarCarro_placaNoAutorizaDiaLunes_exitoso() throws ParseException {
+        //Arrange
+        Carro carro = new Carro("AQW-5R4");
+        carro.modificarFechaIngreso(fechaEntrada());
+        String excepcionPlacaNoPermitida = "No está autorizado a ingresar";
+        when(carroRepositorio.obtenerCantidadCarros()).thenReturn((byte) 10);
+        //Act
+        try {
+            servicioParqueadero.guardarCarros(carro);
+        } catch (PlacaNoPermitidaExcepcion excepcion) {
+            //Assert
+            assertEquals(excepcionPlacaNoPermitida, excepcion.getMessage());
+        }
+    }
+
+    @Test
+    public void guardarMoto_sinCupoParaIngresar_exitoso() {
         //Arrange
         Motocicleta motocicleta = new Motocicleta("AQW-5R4", 650);
-        iniciarExcepcion();
         when(motocicletaRepositorio.obtenerCantidadMotociletas()).thenReturn((byte) motocicleta.CANTIDAD_MAXIMA_EN_PARQUEADERO);
         //Act
         try {
             servicioParqueadero.guardarMotocicletas(motocicleta);
-            fail();
-        } catch (SinCupoExcepcion sinCupoExcepcion) {
+        } catch (SinCupoExcepcion excepcion) {
             //Assert
-            assertEquals(excepcionSinCupoMsj, sinCupoExcepcion.getMessage());
+            assertEquals(iniciarExcepcionSinCupo(), excepcion.getMessage());
+        }
+    }
+
+    @Test
+    public void guardarMoto_placaNoAutorizaDiaLunes_exitoso() throws ParseException {
+        //Arrange
+        Carro carro = new Carro("AQW-5R4");
+        carro.modificarFechaIngreso(fechaEntrada());
+        String excepcionPlacaNoPermitida = "No está autorizado a ingresar";
+        when(carroRepositorio.obtenerCantidadCarros()).thenReturn((byte) 10);
+        //Act
+        try {
+            servicioParqueadero.guardarCarros(carro);
+        } catch (PlacaNoPermitidaExcepcion excepcion) {
+            //Assert
+            assertEquals(excepcionPlacaNoPermitida, excepcion.getMessage());
         }
     }
 
