@@ -16,6 +16,11 @@ pipeline{
     //Aquí comienzan los “items” del Pipeline
     stages{
 
+        stage('Clean'){
+            steps{
+                sh './gradlew --b build.gradle clean compileJava'
+            }
+        }
         stage('Unit Tests') {
             steps{
                 echo "------------>compile & Unit Tests<------------"
