@@ -1,5 +1,7 @@
 package com.example.domain.servicio.parqueadero;
 
+import androidx.lifecycle.MutableLiveData;
+
 import com.example.domain.entidad.Carro;
 import com.example.domain.entidad.Motocicleta;
 import com.example.domain.entidad.Vehiculo;
@@ -29,11 +31,13 @@ public class ServicioParqueadero {
         this.motocicletaRepositorio = motocicletaRepositorio;
     }
 
-    public List<Vehiculo> obtenerVehiculos() {
+    public MutableLiveData<List<Vehiculo>> obtenerVehiculos() {
+        MutableLiveData<List<Vehiculo>> listaMutableVehiculo = new MutableLiveData<>();
         List<Vehiculo> vehiculoLista = new ArrayList<>();
         vehiculoLista.addAll(carroRepositorio.obtenerCarros());
         vehiculoLista.addAll(motocicletaRepositorio.obtenerMotocicletas());
-        return vehiculoLista;
+        listaMutableVehiculo.setValue(vehiculoLista);
+        return listaMutableVehiculo;
     }
 
     public void guardarCarros(Carro carro) {
