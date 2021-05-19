@@ -3,4 +3,13 @@
     <string name="guardado_exitoso">Vehiculo guardado con éxito!!</string>
     <string name="eliminado_exitoso">Vehiculo eliminado con éxito!!</string>
     <string name="cobrar_parqueadero">Cobrar</string>
+    <string name="tv_tipo_vehiculo">Tipo Vehiculo:</string>
+    <string name="rb_carro">Carro</string>
+    <string name="rb_moto">Moto</string>
+    <string name="tv_placa">Placa:</string>
+    <string name="et_placa_oculta">BDA-U234</string>
+    <string name="tv_cilindraje">Cilindraje (CC):</string>
+    <string name="et_cilindraje_oculto">500</string>
+    <string name="btn_cancelar">Cancelar</string>
+    <string name="btn_agregar">Agregar</string>
 </resources>

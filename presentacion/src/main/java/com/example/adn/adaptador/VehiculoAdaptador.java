@@ -58,7 +58,7 @@ public class VehiculoAdaptador extends RecyclerView.Adapter<VehiculoAdaptador.Ve
             placa = vista.findViewById(R.id.placa);
             fechaIngreso = vista.findViewById(R.id.fechaIngreso);
             contenedorCilindraje = vista.findViewById(R.id.contenedorCilindraje);
-            cilindraje = vista.findViewById(R.id.cilingraje);
+            cilindraje = vista.findViewById(R.id.cilindraje);
             btnCobrar = vista.findViewById(R.id.btn_cobrar);
         }
 
