@@ -46,9 +46,9 @@ public class ServicioParqueadero {
             throw new SinCupoExcepcion();
         } else if (validarPlaca(carro.obtenerPlaca(), diaActual)) {
             throw new PlacaNoPermitidaExcepcion();
-        } else {
-            carroRepositorio.guardarCarro(carro);
         }
+        carroRepositorio.guardarCarro(carro);
+
     }
 
     public void guardarMotocicletas(Motocicleta motocicleta) {

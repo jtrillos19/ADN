@@ -1,5 +1,6 @@
 package com.example.adn.modelovista;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -8,11 +9,14 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.adn.R;
 import com.example.domain.entidad.Carro;
 import com.example.domain.entidad.Vehiculo;
 import com.example.domain.servicio.parqueadero.ServicioParqueadero;
 
 import java.util.List;
+
+import dagger.hilt.android.qualifiers.ApplicationContext;
 
 public class ParqueaderoModeloVista extends ViewModel {
 
@@ -20,10 +24,13 @@ public class ParqueaderoModeloVista extends ViewModel {
 
     private ServicioParqueadero servicioParqueadero;
 
-    private MutableLiveData<Boolean> vehiculoGuardado;
+    private MutableLiveData<String> vehiculoGuardado;
+
+    private Context contexto;
 
     @ViewModelInject
-    public ParqueaderoModeloVista(ServicioParqueadero servicioParqueadero) {
+    public ParqueaderoModeloVista(ServicioParqueadero servicioParqueadero, @ApplicationContext Context contexto) {
+        this.contexto = contexto;
         this.servicioParqueadero = servicioParqueadero;
         this.vehiculos = new MutableLiveData<>();
         iniciarVariables();
@@ -40,28 +47,14 @@ public class ParqueaderoModeloVista extends ViewModel {
         }
     }
 
-    public LiveData<Boolean> guardarCarro(Carro carro) {
-        GuardarCarroAsincrono guardarCarroAsincrono = new GuardarCarroAsincrono();
-        guardarCarroAsincrono.execute(carro);
+    public LiveData<String> guardarCarro(Carro carro) {
+        try {
+            servicioParqueadero.guardarCarros(carro);
+            vehiculoGuardado.setValue(contexto.getString(R.string.guardado_exitoso));
+        }catch (Exception exception){
+            vehiculoGuardado.setValue(exception.getMessage());
+        }
         return vehiculoGuardado;
     }
 
-    class GuardarCarroAsincrono extends AsyncTask<Carro, Void, Boolean> {
-        @Override
-        protected Boolean doInBackground(Carro... carro) {
-            try {
-                servicioParqueadero.guardarCarros(carro[0]);
-                vehiculos.getValue().add(carro[0]);
-                return true;
-            } catch (Exception excepcion) {
-                Log.println(Log.ERROR, ParqueaderoModeloVista.class.getName(), excepcion.getMessage());
-                return false;
-            }
-        }
-
-        @Override
-        protected void onPostExecute(Boolean guardado) {
-            vehiculoGuardado.setValue(guardado);
-        }
-    }
 }

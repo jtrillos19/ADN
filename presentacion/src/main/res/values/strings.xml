@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ADN</string>
+    <string name="guardado_exitoso">Vehiculo guardado con éxito!!</string>
 </resources>

@@ -45,7 +45,9 @@ public class CarroRepositorioRoom implements CarroRepositorio {
     @Override
     public void guardarCarro(Carro carro) {
         CarroEntidad carroEntidad = CarroTraductor.pasarCarroDominioACarroDB(carro);
-        carroDao.agregarCarro(carroEntidad);
+        BaseDatosAdministrador.EJECUTOR_ESCRITURA_BD.execute(()->{
+            carroDao.agregarCarro(carroEntidad);
+        });
     }
 
     @Override

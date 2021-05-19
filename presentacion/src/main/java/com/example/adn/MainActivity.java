@@ -23,12 +23,7 @@ public class MainActivity extends AppCompatActivity {
         parqueaderoModeloVista = new ViewModelProvider(this).get(ParqueaderoModeloVista.class);
         Carro carro = new Carro("ASX-VF2");
         parqueaderoModeloVista.guardarCarro(carro).observe(this, vehiculoGuardado -> {
-            if (vehiculoGuardado) {
-                Toast.makeText(this, "Vehiculo guardado!" + carro.obtenerPlaca(), Toast.LENGTH_SHORT).show();
-
-            } else {
-                Toast.makeText(this, "El vehiculo no se ha podido guardar!", Toast.LENGTH_SHORT).show();
-            }
+            Toast.makeText(this,vehiculoGuardado+carro.obtenerPlaca(),Toast.LENGTH_SHORT).show();
         });
 
     }
