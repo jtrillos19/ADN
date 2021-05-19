@@ -4,6 +4,10 @@ plugins {
     id 'jacoco'
 }
 
+jacoco {
+    toolVersion = "$jacocoVersion"
+}
+
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
@@ -23,6 +27,9 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        debug {
+            testCoverageEnabled true
+        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -30,9 +37,6 @@ android {
     }
 }
 
-jacoco {
-    toolVersion = '0.8.5'
-}
 
 tasks.withType(Test) {
     jacoco.includeNoLocationClasses = true

@@ -26,8 +26,11 @@ pipeline{
 
         stage('Unit Tests') {
             steps{
-               echo "------------>compile & Unit Tests<------------"
-               sh './gradlew --b build.gradle test --scan'
+               echo "------------>>Clean<------------"
+               sh './gradlew clean'
+
+               echo "------------>Unit Tests<------------"
+               sh './gradlew  test'
             }
         }
 
@@ -49,7 +52,7 @@ pipeline{
 
         success {
 			echo 'This will run only if successful'
-            junit '**/test-results/testDebugUnitTest/*.xml'
+            junit 'dominio/build/test-results/testDebugUnitTest/*.xml'
         }
 
     }

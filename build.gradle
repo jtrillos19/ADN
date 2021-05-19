@@ -1,11 +1,10 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-ext {
-    appCompatVersion = '1.2.0'
-    lifecycleVersion = '2.2.0'
-    roomVersion = '2.2.5'
-}
-
 buildscript {
+    ext.appCompatVersion = '1.2.0'
+    ext.lifecycleVersion = '2.2.0'
+    ext.roomVersion = '2.2.5'
+    ext.jacocoVersion = '0.8.5'
+
     repositories {
         google()
         jcenter()
