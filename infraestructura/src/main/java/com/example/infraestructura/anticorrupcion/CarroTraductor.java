@@ -13,10 +13,10 @@ public class CarroTraductor {
 
     public static Carro pasarCarroDBaCarroDominio(CarroEntidad carroEntidad) throws ParseException {
         Carro carro = new Carro(carroEntidad.placa);
-        Calendar fechaIngreso = Calendar.getInstance();
+        Calendar fechaEntrada = Calendar.getInstance();
         SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
-        fechaIngreso.setTime(formatoFecha.parse(String.valueOf(fechaIngreso)));
-        carro.modificarFechaIngreso(fechaIngreso);
+        fechaEntrada.setTime(formatoFecha.parse(String.valueOf(carroEntidad.fechaEntrada)));
+        carro.modificarFechaIngreso(fechaEntrada);
         return carro;
     }
 

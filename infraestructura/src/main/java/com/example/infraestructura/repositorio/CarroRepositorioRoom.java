@@ -24,8 +24,8 @@ public class CarroRepositorioRoom implements CarroRepositorio {
     private CarroDao carroDao;
 
     @Inject
-    public CarroRepositorioRoom(@ApplicationContext Context context) {
-        baseDatosAdministrador = BaseDatosAdministrador.obtenerInstancia(context);
+    public CarroRepositorioRoom(@ApplicationContext Context contexto) {
+        baseDatosAdministrador = BaseDatosAdministrador.obtenerInstancia(contexto);
         carroDao = baseDatosAdministrador.carroDao();
     }
 
@@ -62,7 +62,7 @@ public class CarroRepositorioRoom implements CarroRepositorio {
         ObtenerCantidadCarrosAsincrono obtenerCantidadCarrosAsincrono = new ObtenerCantidadCarrosAsincrono();
         try {
             cantidadCarros = obtenerCantidadCarrosAsincrono.execute().get();
-        }catch (Exception e){
+        } catch (Exception e) {
             Log.e("BD total carros", e.getMessage());
         }
         return cantidadCarros;
@@ -83,7 +83,7 @@ public class CarroRepositorioRoom implements CarroRepositorio {
         }
     }
 
-    class EliminarCarroAsincrono extends AsyncTask<CarroEntidad,Void,Void>{
+    class EliminarCarroAsincrono extends AsyncTask<CarroEntidad, Void, Void> {
 
         @Override
         protected Void doInBackground(CarroEntidad... carroEntidades) {
@@ -92,7 +92,7 @@ public class CarroRepositorioRoom implements CarroRepositorio {
         }
     }
 
-    class ObtenerCantidadCarrosAsincrono extends AsyncTask<Void,Void,Byte>{
+    class ObtenerCantidadCarrosAsincrono extends AsyncTask<Void, Void, Byte> {
 
         @Override
         protected Byte doInBackground(Void... voids) {

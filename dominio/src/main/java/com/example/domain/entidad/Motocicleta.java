@@ -4,19 +4,19 @@ import java.util.Calendar;
 
 public class Motocicleta extends Vehiculo {
 
-    private final short cilindraje;
+    private final int cilindraje;
     public static final short VALOR_HORA_PARQUEADERO = 500;
     public static final short VALOR_DIA_PARQUEADERO = 4000;
     public static final short CILINDRAJE_MAXIMO = 500;
     public static final short EXCEDENTE = 2000;
     public final short CANTIDAD_MAXIMA_EN_PARQUEADERO = 10;
 
-    public Motocicleta(String placa, short cilindraje) {
+    public Motocicleta(String placa, int cilindraje) {
         super(placa);
         this.cilindraje = cilindraje;
     }
 
-    public short obtenerCilindraje() {
+    public int obtenerCilindraje() {
         return cilindraje;
     }
 

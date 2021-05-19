@@ -45,7 +45,7 @@ public class ServicioParqueaderoTest {
 
         servicioParqueadero = new ServicioParqueadero(carroRepositorio, motocicletaRepositorio);
         carro = new Carro("AQW-578");
-        motocicleta = new Motocicleta("AQW-414", (short) 650);
+        motocicleta = new Motocicleta("AQW-414",  650);
         excepcionSinCupoMsj = "No hay cupo disponible";
     }
 

@@ -32,7 +32,7 @@ public class MotocicletaTest {
     @Test
     public void calcularValorTotalDeParqueadero_motoCon5HorasDeParqueoCilindraje650_exitoso() {
         //Arrange
-        Motocicleta motocicleta = new Motocicleta("ASW-KJ8", (short) 650);
+        Motocicleta motocicleta = new Motocicleta("ASW-KJ8",  650);
         motocicleta.modificarFechaIngreso(fechaIngreso);
         //Act
         int subTotal = motocicleta.calcularValorTotalDeParqueadero(fechaSalida);
