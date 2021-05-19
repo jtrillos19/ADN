@@ -35,7 +35,7 @@ public class MotocicletaRepositorioRoom implements MotocicletaRepositorio {
         ObtenerListaMotocicletasAsincrono obtenerListaMotocicletasAsincrono = new ObtenerListaMotocicletasAsincrono();
         try {
             List<MotocicletaEntidad> motocicletaDB = obtenerListaMotocicletasAsincrono.execute().get();
-            MotocicletaTraductor.pasarListaMotocicletaDominioAListaMotocicletaBD(motocicletaDB);
+            MotocicletaTraductor.pasarListaMotocicletaBDAListaMotocicletaDominio(motocicletaDB);
         } catch (Exception e) {
             Log.e("Listar Motocicletas DB", e.getMessage());
         }
@@ -44,43 +44,36 @@ public class MotocicletaRepositorioRoom implements MotocicletaRepositorio {
 
     @Override
     public void guardarMotocicleta(Motocicleta motocicleta) {
-        AgregarMotocicletasAsincrono agregarMotocicletasAsincrono = new AgregarMotocicletasAsincrono();
         MotocicletaEntidad motocicletaEntidad = MotocicletaTraductor.pasarMotocicletaDominioAMotocicletaBD(motocicleta);
-        agregarMotocicletasAsincrono.execute(motocicletaEntidad);
+       BaseDatosAdministrador.EJECUTOR_ESCRITURA_BD.execute(()->{
+           motocicletaDao.agregarMotocicleta(motocicletaEntidad);
+       });
     }
 
     @Override
     public void eliminarMotocicleta(Motocicleta motocicleta) {
-        EliminarMotocicletaAsincrono eliminarMotocicletaAsincrono = new EliminarMotocicletaAsincrono();
         MotocicletaEntidad motocicletaEntidad = MotocicletaTraductor.pasarMotocicletaDominioAMotocicletaBD(motocicleta);
-        eliminarMotocicletaAsincrono.execute(motocicletaEntidad);
+       BaseDatosAdministrador.EJECUTOR_ESCRITURA_BD.execute(()->{
+           motocicletaDao.eliminarMotocicleta(motocicletaEntidad);
+       });
     }
 
     @Override
     public byte obtenerCantidadMotociletas() {
-        return 0;
+        byte cantidadMotocicletas = 0;
+        ObtenerCantidadMotocicletasAsincrono obtenerCantidadMotocicletasAsincrono = new ObtenerCantidadMotocicletasAsincrono();
+        try {
+            cantidadMotocicletas = obtenerCantidadMotocicletasAsincrono.execute().get();
+        } catch (Exception excepcion) {
+            Log.println(Log.ERROR, MotocicletaRepositorioRoom.class.getName(), excepcion.getMessage());
+        }
+        return cantidadMotocicletas;
     }
 
     class ObtenerListaMotocicletasAsincrono extends AsyncTask<Void, Void, List<MotocicletaEntidad>> {
         @Override
         protected List<MotocicletaEntidad> doInBackground(Void... voids) {
             return motocicletaDao.obtenerMotocicletas();
-        }
-    }
-
-    class AgregarMotocicletasAsincrono extends AsyncTask<MotocicletaEntidad, Void, Void> {
-        @Override
-        protected Void doInBackground(MotocicletaEntidad... motocicletaEntidad) {
-            motocicletaDao.agregarMotocicleta(motocicletaEntidad[0]);
-            return null;
-        }
-    }
-
-    class EliminarMotocicletaAsincrono extends AsyncTask<MotocicletaEntidad, Void, Void> {
-        @Override
-        protected Void doInBackground(MotocicletaEntidad... motocicletaEntidad) {
-            motocicletaDao.eliminarMotocicleta(motocicletaEntidad[0]);
-            return null;
         }
     }
 

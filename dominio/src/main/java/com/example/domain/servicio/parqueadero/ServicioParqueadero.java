@@ -57,7 +57,10 @@ public class ServicioParqueadero {
 
     public void guardarMotocicletas(Motocicleta motocicleta) {
         byte cantidadMotociletas = motocicletaRepositorio.obtenerCantidadMotociletas();
-        int diaActual = Calendar.getInstance().getFirstDayOfWeek();
+        int diaActual = 0;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            diaActual = LocalDate.now().getDayOfWeek().getValue();
+        }
         if (cantidadMotociletas == motocicleta.CANTIDAD_MAXIMA_EN_PARQUEADERO) {
             throw new SinCupoExcepcion();
         } else if (validarPlaca(motocicleta.obtenerPlaca(), diaActual)) {
@@ -89,5 +92,9 @@ public class ServicioParqueadero {
 
     public int obtenerCantidadCarros(){
         return carroRepositorio.obtenerCantidadCarros();
+    }
+
+    public int obtenerCantidadMotos() {
+        return motocicletaRepositorio.obtenerCantidadMotociletas();
     }
 }

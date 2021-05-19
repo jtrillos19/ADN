@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.adn.R;
 import com.example.domain.entidad.Carro;
+import com.example.domain.entidad.Motocicleta;
 import com.example.domain.entidad.Vehiculo;
 import com.example.domain.servicio.parqueadero.ServicioParqueadero;
 
@@ -29,6 +30,12 @@ public class ParqueaderoModeloVista extends ViewModel {
     private MutableLiveData<String> carroEliminado;
 
     private MutableLiveData<Integer> cantidadCarros;
+
+    private MutableLiveData<String> motocicletaGuardado;
+
+    private MutableLiveData<String> motocicletaEliminado;
+
+    private MutableLiveData<Integer> cantidadMotocicletas;
 
     private Context contexto;
 
@@ -79,6 +86,37 @@ public class ParqueaderoModeloVista extends ViewModel {
             cantidadCarros = new MutableLiveData<>();
         cantidadCarros.setValue(servicioParqueadero.obtenerCantidadCarros());
         return cantidadCarros;
+    }
+
+    public LiveData<String> guardarMotocicleta(Motocicleta motocicleta) {
+        if (motocicletaGuardado == null)
+            motocicletaGuardado = new MutableLiveData<>();
+        try {
+            servicioParqueadero.guardarMotocicletas(motocicleta);
+            motocicletaGuardado.setValue(contexto.getString(R.string.guardado_exitoso));
+        } catch (Exception excepcion) {
+            motocicletaGuardado.setValue(excepcion.getMessage());
+        }
+        return motocicletaGuardado;
+    }
+
+    public LiveData<String> eliminarMotocicleta(Motocicleta motocicleta) {
+        if (motocicletaEliminado == null)
+            motocicletaEliminado = new MutableLiveData<>();
+        try {
+            servicioParqueadero.eliminarMotocicleta(motocicleta);
+            motocicletaEliminado.setValue(contexto.getString(R.string.eliminado_exitoso));
+        } catch (Exception excepcion) {
+            motocicletaEliminado.setValue(excepcion.getMessage());
+        }
+        return motocicletaEliminado;
+    }
+
+    public LiveData<Integer> obtenerCantidadMotocicletas() {
+        if (cantidadMotocicletas == null)
+            cantidadMotocicletas = new MutableLiveData<>();
+        cantidadMotocicletas.setValue(servicioParqueadero.obtenerCantidadMotos());
+        return cantidadMotocicletas;
     }
 
 }

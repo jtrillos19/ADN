@@ -24,14 +24,6 @@ public class MainActivity extends AppCompatActivity {
 
         parqueaderoModeloVista = new ViewModelProvider(this).get(ParqueaderoModeloVista.class);
 
-        for (Vehiculo vehiculo : parqueaderoModeloVista.vehiculos.getValue()) {
-            System.out.println("***************** " + vehiculo.obtenerPlaca() + " *****************");
-        }
-
-        Carro carro = new Carro("TRI-LL9");
-        parqueaderoModeloVista.guardarCarro(carro).observe(this, vehiculoGuardado -> {
-            Toast.makeText(this,vehiculoGuardado+carro.obtenerPlaca(),Toast.LENGTH_SHORT).show();
-        });
 
     }
 }

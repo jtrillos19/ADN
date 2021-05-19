@@ -77,14 +77,6 @@ public class CarroRepositorioRoom implements CarroRepositorio {
         }
     }
 
-    class EliminarCarroAsincrono extends AsyncTask<CarroEntidad, Void, Void> {
-
-        @Override
-        protected Void doInBackground(CarroEntidad... carroEntidades) {
-            carroDao.eliminarCarro(carroEntidades[0]);
-            return null;
-        }
-    }
 
     class ObtenerCantidadCarrosAsincrono extends AsyncTask<Void, Void, Byte> {
 
