@@ -7,19 +7,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.Window;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.example.adn.adaptador.VehiculoAdaptador;
 import com.example.adn.modelovista.ParqueaderoModeloVista;
-import com.example.domain.entidad.Carro;
-import com.example.domain.entidad.Motocicleta;
 import com.example.domain.entidad.Vehiculo;
 
 import java.util.List;
@@ -27,7 +19,7 @@ import java.util.List;
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
-public class MainActivity extends AppCompatActivity {
+public class ActividadPrincipal extends AppCompatActivity {
 
 
     private ParqueaderoModeloVista parqueaderoModeloVista;
@@ -40,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         iniciarElementos();
-        btnIngresarVehiculo.setOnClickListener(v -> DialogoVehiculo.crearDialogoGuardarVehiculo(this).show());
+        btnIngresarVehiculo.setOnClickListener(v -> VehiculoDialogo.crearDialogoGuardarVehiculo(this).show());
         parqueaderoModeloVista.obtenerListaVehiculos().observe(this, this::actualizarAdaptador);
     }
 

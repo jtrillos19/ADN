@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.adn.MainActivity;
+import com.example.adn.ActividadPrincipal;
 import com.example.adn.R;
 import com.example.domain.entidad.Motocicleta;
 import com.example.domain.entidad.Vehiculo;
@@ -74,8 +74,8 @@ public class VehiculoAdaptador extends RecyclerView.Adapter<VehiculoAdaptador.Ve
         }
 
         public void cobrarParqueadero(Vehiculo vehiculo){
-            if (activity instanceof MainActivity){
-                MainActivity actividadPrincipal = (MainActivity) activity;
+            if (activity instanceof ActividadPrincipal){
+                ActividadPrincipal actividadPrincipal = (ActividadPrincipal) activity;
                 actividadPrincipal.cobrarParqueadero(vehiculo);
             }
         }

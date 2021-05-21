@@ -7,7 +7,7 @@ import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 
-public class EspressoPruebaBase {
+public class PruebaBase {
     public static void clicBoton(Integer idRecurso) {
         onView(withId(idRecurso))
                 .perform(click());

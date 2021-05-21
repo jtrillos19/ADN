@@ -1,8 +1,6 @@
 package com.example.adn.modelovista;
 
 import android.content.Context;
-import android.os.AsyncTask;
-import android.util.Log;
 
 import androidx.hilt.lifecycle.ViewModelInject;
 import androidx.lifecycle.LiveData;
@@ -13,7 +11,7 @@ import com.example.adn.R;
 import com.example.domain.entidad.Carro;
 import com.example.domain.entidad.Motocicleta;
 import com.example.domain.entidad.Vehiculo;
-import com.example.domain.servicio.parqueadero.ServicioParqueadero;
+import com.example.domain.servicio.parqueadero.ParqueaderoServicio;
 
 import java.util.List;
 
@@ -23,7 +21,7 @@ public class ParqueaderoModeloVista extends ViewModel {
 
     public MutableLiveData<List<Vehiculo>> vehiculos;
 
-    private ServicioParqueadero servicioParqueadero;
+    private ParqueaderoServicio parqueaderoServicio;
 
     private MutableLiveData<Integer> totalPagar;
 
@@ -32,16 +30,16 @@ public class ParqueaderoModeloVista extends ViewModel {
     private Context contexto;
 
     @ViewModelInject
-    public ParqueaderoModeloVista(ServicioParqueadero servicioParqueadero, @ApplicationContext Context contexto) {
+    public ParqueaderoModeloVista(ParqueaderoServicio parqueaderoServicio, @ApplicationContext Context contexto) {
         this.contexto = contexto;
-        this.servicioParqueadero = servicioParqueadero;
+        this.parqueaderoServicio = parqueaderoServicio;
         obtenerVehiculos();
     }
 
     private void obtenerVehiculos() {
         if (vehiculos == null)
             this.vehiculos = new MutableLiveData<>();
-        vehiculos = servicioParqueadero.obtenerVehiculos();
+        vehiculos = parqueaderoServicio.obtenerVehiculos();
     }
 
     public MutableLiveData<List<Vehiculo>> obtenerListaVehiculos() {
@@ -53,12 +51,12 @@ public class ParqueaderoModeloVista extends ViewModel {
             totalPagar = new MutableLiveData<>();
         if (vehiculo instanceof Carro) {
             Carro carro = (Carro) vehiculo;
-            totalPagar.setValue(servicioParqueadero.valorTotalParqueaderoCarro(carro));
-            servicioParqueadero.eliminarCarro(carro);
+            totalPagar.setValue(parqueaderoServicio.valorTotalParqueaderoCarro(carro));
+            parqueaderoServicio.eliminarCarro(carro);
         } else {
             Motocicleta motocicleta = (Motocicleta) vehiculo;
-            totalPagar.setValue(servicioParqueadero.valorTotalParqueaderoMotocicleta(motocicleta));
-            servicioParqueadero.eliminarMotocicleta(motocicleta);
+            totalPagar.setValue(parqueaderoServicio.valorTotalParqueaderoMotocicleta(motocicleta));
+            parqueaderoServicio.eliminarMotocicleta(motocicleta);
         }
         vehiculos.getValue().remove(vehiculo);
         return totalPagar;
@@ -70,10 +68,10 @@ public class ParqueaderoModeloVista extends ViewModel {
         try {
             if (vehiculo instanceof Carro) {
                 Carro carro = (Carro) vehiculo;
-                servicioParqueadero.guardarCarros(carro);
+                parqueaderoServicio.guardarCarros(carro);
             } else {
                 Motocicleta motocicleta = (Motocicleta) vehiculo;
-                servicioParqueadero.guardarMotocicletas(motocicleta);
+                parqueaderoServicio.guardarMotocicletas(motocicleta);
             }
             vehiculos.getValue().add(vehiculo);
             vehiculoGuardado.setValue(contexto.getString(R.string.guardado_exitoso));

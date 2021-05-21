@@ -15,7 +15,7 @@ import com.example.domain.entidad.Carro;
 import com.example.domain.entidad.Motocicleta;
 import com.example.domain.entidad.Vehiculo;
 
-public class DialogoVehiculo {
+public class VehiculoDialogo {
 
     private static LinearLayout contenedorCilindraje;
     private static RadioButton tipoCarro;
@@ -68,8 +68,8 @@ public class DialogoVehiculo {
     }
 
     private static void guardarVehiculo(Activity actividad, Vehiculo vehiculo, AlertDialog dialogo) {
-        if (actividad instanceof MainActivity) {
-            ((MainActivity) actividad).guardarVehiculo(vehiculo,dialogo);
+        if (actividad instanceof ActividadPrincipal) {
+            ((ActividadPrincipal) actividad).guardarVehiculo(vehiculo,dialogo);
         }
     }
 }

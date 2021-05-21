@@ -12,7 +12,7 @@ import dagger.hilt.android.components.ActivityComponent;
 
 @Module
 @InstallIn({ActivityComponent.class})
-public abstract class ModuloVehiculo {
+public abstract class VehiculoModulo {
 
     @Binds
     public abstract CarroRepositorio bindCarroRepositorio(CarroRepositorioRoom carroRepositorioRoom);

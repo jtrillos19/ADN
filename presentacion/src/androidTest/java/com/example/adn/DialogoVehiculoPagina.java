@@ -1,6 +1,6 @@
 package com.example.adn;
 
-public class PaginaDialogoVehiculo extends EspressoPruebaBase{
+public class DialogoVehiculoPagina extends PruebaBase {
 
     public static int obtenerRecursoTipoCarro() {
         return R.id.tipoCarro;

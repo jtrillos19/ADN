@@ -17,7 +17,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-public class ServicioParqueadero {
+public class ParqueaderoServicio {
 
     private final CarroRepositorio carroRepositorio;
     private final MotocicletaRepositorio motocicletaRepositorio;
@@ -26,7 +26,7 @@ public class ServicioParqueadero {
     private final int DIA_DOMINGO = 7;
 
     @Inject
-    public ServicioParqueadero(CarroRepositorio carroRepositorio, MotocicletaRepositorio motocicletaRepositorio) {
+    public ParqueaderoServicio(CarroRepositorio carroRepositorio, MotocicletaRepositorio motocicletaRepositorio) {
         this.carroRepositorio = carroRepositorio;
         this.motocicletaRepositorio = motocicletaRepositorio;
     }
