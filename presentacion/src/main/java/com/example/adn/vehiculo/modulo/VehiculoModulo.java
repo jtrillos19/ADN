@@ -1,4 +1,4 @@
-package com.example.adn.moduloid;
+package com.example.adn.vehiculo.modulo;
 
 import com.example.domain.carro.repositorio.CarroRepositorio;
 import com.example.domain.motocicleta.repositorio.MotocicletaRepositorio;

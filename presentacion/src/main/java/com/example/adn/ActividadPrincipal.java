@@ -10,8 +10,9 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.adn.adaptador.VehiculoAdaptador;
-import com.example.adn.modelovista.ParqueaderoModeloVista;
+import com.example.adn.vehiculo.VehiculoDialogo;
+import com.example.adn.vehiculo.adaptador.VehiculoAdaptador;
+import com.example.adn.parqueadero.modelovista.ParqueaderoModeloVista;
 import com.example.domain.vehiculo.entidad.Vehiculo;
 
 import java.util.List;

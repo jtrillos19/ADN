@@ -1,4 +1,4 @@
-package com.example.adn;
+package com.example.adn.vehiculo;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -11,6 +11,8 @@ import android.widget.RadioButton;
 
 import androidx.appcompat.app.AlertDialog;
 
+import com.example.adn.ActividadPrincipal;
+import com.example.adn.R;
 import com.example.domain.carro.entidad.Carro;
 import com.example.domain.motocicleta.entidad.Motocicleta;
 import com.example.domain.vehiculo.entidad.Vehiculo;

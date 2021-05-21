@@ -1,4 +1,4 @@
-package com.example.adn.adaptador;
+package com.example.adn.vehiculo.adaptador;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
