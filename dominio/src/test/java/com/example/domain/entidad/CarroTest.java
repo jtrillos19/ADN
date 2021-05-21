@@ -15,7 +15,7 @@ public class CarroTest {
     private SimpleDateFormat formatoFecha;
 
     @Before
-    public void iniciarFormatoFecha(){
+    public void iniciarFormatoFecha() {
         formatoFecha = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
     }
 
@@ -39,7 +39,7 @@ public class CarroTest {
         Carro carro = new Carro("ASW-KJ8");
         carro.modificarFechaIngreso(fechaEntrada("19-05-2021 6:20:56"));
         //Act
-        int subTotal = carro.calcularValorTotalDeParqueadero(fechaSalida("19-05-2021 10:30:56"));
+        int subTotal = carro.calcularValorTotalDeParqueadero(fechaSalida("19-05-2021 10:30:56"), carro.VALOR_HORA_PARQUEADERO, carro.VALOR_DIA_PARQUEADERO);
         //Assert
         assertEquals(5000, subTotal);
     }
@@ -50,7 +50,7 @@ public class CarroTest {
         Carro carro = new Carro("ASW-KJ8");
         carro.modificarFechaIngreso(fechaEntrada("19-05-2021 10:30:56"));
         //Act
-        int subTotal = carro.calcularValorTotalDeParqueadero(fechaSalida("20-05-2021 10:30:56"));
+        int subTotal = carro.calcularValorTotalDeParqueadero(fechaSalida("20-05-2021 10:30:56"), carro.VALOR_HORA_PARQUEADERO, carro.VALOR_DIA_PARQUEADERO);
         //Assert
         assertEquals(8000, subTotal);
     }
@@ -61,7 +61,7 @@ public class CarroTest {
         Carro carro = new Carro("ASW-KJ8");
         carro.modificarFechaIngreso(fechaEntrada("19-05-2021 1:30:56"));
         //Act
-        int subTotal = carro.calcularValorTotalDeParqueadero(fechaSalida("20-05-2021 11:30:56"));
+        int subTotal = carro.calcularValorTotalDeParqueadero(fechaSalida("20-05-2021 11:30:56"), carro.VALOR_HORA_PARQUEADERO, carro.VALOR_DIA_PARQUEADERO);
         //Assert
         assertEquals(16000, subTotal);
     }
