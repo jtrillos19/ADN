@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.adn.ActividadPrincipal;
 import com.example.adn.R;
-import com.example.domain.entidad.Motocicleta;
-import com.example.domain.entidad.Vehiculo;
+import com.example.domain.motocicleta.entidad.Motocicleta;
+import com.example.domain.vehiculo.entidad.Vehiculo;
 
 import java.util.List;
 

@@ -8,10 +8,10 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.adn.R;
-import com.example.domain.entidad.Carro;
-import com.example.domain.entidad.Motocicleta;
-import com.example.domain.entidad.Vehiculo;
-import com.example.domain.servicio.parqueadero.ParqueaderoServicio;
+import com.example.domain.carro.entidad.Carro;
+import com.example.domain.motocicleta.entidad.Motocicleta;
+import com.example.domain.vehiculo.entidad.Vehiculo;
+import com.example.domain.parqueadero.servicio.ParqueaderoServicio;
 
 import java.util.List;
 
@@ -28,6 +28,8 @@ public class ParqueaderoModeloVista extends ViewModel {
     private MutableLiveData<String> vehiculoGuardado;
 
     private Context contexto;
+
+
 
     @ViewModelInject
     public ParqueaderoModeloVista(ParqueaderoServicio parqueaderoServicio, @ApplicationContext Context contexto) {

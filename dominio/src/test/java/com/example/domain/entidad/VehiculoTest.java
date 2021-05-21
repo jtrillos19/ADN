@@ -1,6 +1,7 @@
 package com.example.domain.entidad;
 
-import org.junit.Before;
+import com.example.domain.vehiculo.entidad.Vehiculo;
+
 import org.junit.Test;
 
 import java.text.ParseException;

@@ -1,12 +1,12 @@
 package com.example.domain;
 
-import com.example.domain.entidad.Carro;
-import com.example.domain.entidad.Motocicleta;
-import com.example.domain.excepcion.PlacaNoPermitidaExcepcion;
-import com.example.domain.excepcion.SinCupoExcepcion;
-import com.example.domain.repositorio.CarroRepositorio;
-import com.example.domain.repositorio.MotocicletaRepositorio;
-import com.example.domain.servicio.parqueadero.ParqueaderoServicio;
+import com.example.domain.carro.entidad.Carro;
+import com.example.domain.motocicleta.entidad.Motocicleta;
+import com.example.domain.vehiculo.excepcion.PlacaNoPermitidaExcepcion;
+import com.example.domain.vehiculo.excepcion.SinCupoExcepcion;
+import com.example.domain.carro.repositorio.CarroRepositorio;
+import com.example.domain.motocicleta.repositorio.MotocicletaRepositorio;
+import com.example.domain.parqueadero.servicio.ParqueaderoServicio;
 
 import org.junit.Before;
 import org.junit.Test;

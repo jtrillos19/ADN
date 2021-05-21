@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import com.example.adn.adaptador.VehiculoAdaptador;
 import com.example.adn.modelovista.ParqueaderoModeloVista;
-import com.example.domain.entidad.Vehiculo;
+import com.example.domain.vehiculo.entidad.Vehiculo;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.example.domain.entidad;
+package com.example.domain.vehiculo.entidad;
 
 import java.util.Calendar;
 

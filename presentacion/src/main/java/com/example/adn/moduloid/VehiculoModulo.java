@@ -1,7 +1,7 @@
 package com.example.adn.moduloid;
 
-import com.example.domain.repositorio.CarroRepositorio;
-import com.example.domain.repositorio.MotocicletaRepositorio;
+import com.example.domain.carro.repositorio.CarroRepositorio;
+import com.example.domain.motocicleta.repositorio.MotocicletaRepositorio;
 import com.example.infraestructura.repositorio.CarroRepositorioRoom;
 import com.example.infraestructura.repositorio.MotocicletaRepositorioRoom;
 

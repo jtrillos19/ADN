@@ -1,5 +1,7 @@
 package com.example.domain.entidad;
 
+import com.example.domain.carro.entidad.Carro;
+
 import org.junit.Before;
 import org.junit.Test;
 

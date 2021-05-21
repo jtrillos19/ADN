@@ -1,6 +1,6 @@
-package com.example.domain.entidad;
+package com.example.domain.carro.entidad;
 
-import java.util.Calendar;
+import com.example.domain.vehiculo.entidad.Vehiculo;
 
 public class Carro extends Vehiculo {
 

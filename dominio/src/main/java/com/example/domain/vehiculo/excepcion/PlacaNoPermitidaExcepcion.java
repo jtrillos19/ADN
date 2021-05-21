@@ -1,4 +1,4 @@
-package com.example.domain.excepcion;
+package com.example.domain.vehiculo.excepcion;
 
 public class PlacaNoPermitidaExcepcion extends RuntimeException {
 

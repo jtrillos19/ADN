@@ -11,9 +11,9 @@ import android.widget.RadioButton;
 
 import androidx.appcompat.app.AlertDialog;
 
-import com.example.domain.entidad.Carro;
-import com.example.domain.entidad.Motocicleta;
-import com.example.domain.entidad.Vehiculo;
+import com.example.domain.carro.entidad.Carro;
+import com.example.domain.motocicleta.entidad.Motocicleta;
+import com.example.domain.vehiculo.entidad.Vehiculo;
 
 public class VehiculoDialogo {
 

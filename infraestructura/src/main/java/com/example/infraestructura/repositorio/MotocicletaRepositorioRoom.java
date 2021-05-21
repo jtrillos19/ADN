@@ -4,8 +4,8 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.example.domain.entidad.Motocicleta;
-import com.example.domain.repositorio.MotocicletaRepositorio;
+import com.example.domain.motocicleta.entidad.Motocicleta;
+import com.example.domain.motocicleta.repositorio.MotocicletaRepositorio;
 import com.example.infraestructura.anticorrupcion.MotocicletaTraductor;
 import com.example.infraestructura.db.BaseDatosAdministrador;
 import com.example.infraestructura.db.dao.MotocicletaDao;

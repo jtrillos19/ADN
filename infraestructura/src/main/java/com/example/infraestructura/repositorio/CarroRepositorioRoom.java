@@ -4,8 +4,8 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.example.domain.entidad.Carro;
-import com.example.domain.repositorio.CarroRepositorio;
+import com.example.domain.carro.entidad.Carro;
+import com.example.domain.carro.repositorio.CarroRepositorio;
 import com.example.infraestructura.anticorrupcion.CarroTraductor;
 import com.example.infraestructura.db.BaseDatosAdministrador;
 import com.example.infraestructura.db.dao.CarroDao;

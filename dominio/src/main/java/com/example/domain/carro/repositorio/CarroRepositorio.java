@@ -1,6 +1,6 @@
-package com.example.domain.repositorio;
+package com.example.domain.carro.repositorio;
 
-import com.example.domain.entidad.Carro;
+import com.example.domain.carro.entidad.Carro;
 
 import java.util.List;
 
