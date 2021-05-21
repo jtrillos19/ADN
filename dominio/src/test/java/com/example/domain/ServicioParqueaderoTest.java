@@ -129,13 +129,13 @@ public class ServicioParqueaderoTest {
     @Test
     public void guardarMoto_placaNoAutorizaDiaLunes_exitoso() throws ParseException {
         //Arrange
-        Carro carro = new Carro("AQW-5R4");
-        carro.modificarFechaIngreso(fechaEntrada());
+        Motocicleta motocicleta = new Motocicleta("AQW-5R4", 300);
+        motocicleta.modificarFechaIngreso(fechaEntrada());
         String excepcionPlacaNoPermitida = "No está autorizado a ingresar";
-        when(carroRepositorio.obtenerCantidadCarros()).thenReturn((byte) 10);
+        when(motocicletaRepositorio.obtenerCantidadMotociletas()).thenReturn((byte) 5);
         //Act
         try {
-            servicioParqueadero.guardarCarros(carro);
+            servicioParqueadero.guardarMotocicletas(motocicleta);
         } catch (PlacaNoPermitidaExcepcion excepcion) {
             //Assert
             assertEquals(excepcionPlacaNoPermitida, excepcion.getMessage());
