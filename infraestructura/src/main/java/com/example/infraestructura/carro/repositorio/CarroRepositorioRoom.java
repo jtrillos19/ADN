@@ -1,4 +1,4 @@
-package com.example.infraestructura.repositorio;
+package com.example.infraestructura.carro.repositorio;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -6,10 +6,10 @@ import android.util.Log;
 
 import com.example.domain.carro.entidad.Carro;
 import com.example.domain.carro.repositorio.CarroRepositorio;
-import com.example.infraestructura.anticorrupcion.CarroTraductor;
+import com.example.infraestructura.carro.anticorrupcion.CarroTraductor;
 import com.example.infraestructura.db.BaseDatosAdministrador;
-import com.example.infraestructura.db.dao.CarroDao;
-import com.example.infraestructura.db.entidad.CarroEntidad;
+import com.example.infraestructura.carro.db.dao.CarroDao;
+import com.example.infraestructura.carro.db.entidad.CarroEntidad;
 
 import java.util.ArrayList;
 import java.util.List;

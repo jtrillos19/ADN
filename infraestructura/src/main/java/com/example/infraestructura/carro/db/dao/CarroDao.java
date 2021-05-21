@@ -1,11 +1,10 @@
-package com.example.infraestructura.db.dao;
+package com.example.infraestructura.carro.db.dao;
 
 import androidx.room.Dao;
-import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import com.example.infraestructura.db.entidad.CarroEntidad;
+import com.example.infraestructura.carro.db.entidad.CarroEntidad;
 
 import java.util.List;
 

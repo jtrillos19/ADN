@@ -1,7 +1,7 @@
-package com.example.infraestructura.anticorrupcion;
+package com.example.infraestructura.motocicleta.anticorrupcion;
 
 import com.example.domain.motocicleta.entidad.Motocicleta;
-import com.example.infraestructura.db.entidad.MotocicletaEntidad;
+import com.example.infraestructura.motocicleta.db.entidad.MotocicletaEntidad;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

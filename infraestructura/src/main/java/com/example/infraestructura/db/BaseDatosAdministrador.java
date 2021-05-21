@@ -6,10 +6,10 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-import com.example.infraestructura.db.dao.CarroDao;
-import com.example.infraestructura.db.dao.MotocicletaDao;
-import com.example.infraestructura.db.entidad.CarroEntidad;
-import com.example.infraestructura.db.entidad.MotocicletaEntidad;
+import com.example.infraestructura.carro.db.dao.CarroDao;
+import com.example.infraestructura.motocicleta.db.dao.MotocicletaDao;
+import com.example.infraestructura.carro.db.entidad.CarroEntidad;
+import com.example.infraestructura.motocicleta.db.entidad.MotocicletaEntidad;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

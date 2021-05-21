@@ -1,4 +1,4 @@
-package com.example.infraestructura.repositorio;
+package com.example.infraestructura.motocicleta.repositorio;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -6,10 +6,10 @@ import android.util.Log;
 
 import com.example.domain.motocicleta.entidad.Motocicleta;
 import com.example.domain.motocicleta.repositorio.MotocicletaRepositorio;
-import com.example.infraestructura.anticorrupcion.MotocicletaTraductor;
+import com.example.infraestructura.motocicleta.anticorrupcion.MotocicletaTraductor;
 import com.example.infraestructura.db.BaseDatosAdministrador;
-import com.example.infraestructura.db.dao.MotocicletaDao;
-import com.example.infraestructura.db.entidad.MotocicletaEntidad;
+import com.example.infraestructura.motocicleta.db.dao.MotocicletaDao;
+import com.example.infraestructura.motocicleta.db.entidad.MotocicletaEntidad;
 
 import java.util.ArrayList;
 import java.util.List;

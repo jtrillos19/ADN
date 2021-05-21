@@ -2,8 +2,8 @@ package com.example.adn.moduloid;
 
 import com.example.domain.carro.repositorio.CarroRepositorio;
 import com.example.domain.motocicleta.repositorio.MotocicletaRepositorio;
-import com.example.infraestructura.repositorio.CarroRepositorioRoom;
-import com.example.infraestructura.repositorio.MotocicletaRepositorioRoom;
+import com.example.infraestructura.carro.repositorio.CarroRepositorioRoom;
+import com.example.infraestructura.motocicleta.repositorio.MotocicletaRepositorioRoom;
 
 import dagger.Binds;
 import dagger.Module;
