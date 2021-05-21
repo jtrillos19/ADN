@@ -16,7 +16,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 
 @LargeTest
 @RunWith(AndroidJUnit4ClassRunner.class)
-public class ActividadPrincipalPruebaEspresso {
+public class GestionPruebasEspressoActividadPrincipal {
 
     @Rule
     public ActivityTestRule<MainActivity> mainActivityActivityTestRule = new ActivityTestRule<>(MainActivity.class);
@@ -26,11 +26,11 @@ public class ActividadPrincipalPruebaEspresso {
         //Arrange
         String placa = "AXCTR4";
         //Act
-        onView(withId(R.id.btnIngresarVehiculo)).perform(click());
-        onView(withId(R.id.tipoCarro)).perform(click());
-        onView(withId(R.id.placa)).perform(typeText(placa), ViewActions.closeSoftKeyboard());
+        PaginaActividadPrincipal.clicBoton(PaginaActividadPrincipal.obtenerRecursoBotonIngresarVehiculo());
+        PaginaDialogoVehiculo.clicBoton(PaginaDialogoVehiculo.obtenerRecursoTipoCarro());
+        PaginaDialogoVehiculo.editarCajaTexto(PaginaDialogoVehiculo.obtenerRecursoCajaTextoPlaca(), placa);
         //Assert
-        onView(withId(R.id.btnAgregar)).perform(click());
+        PaginaDialogoVehiculo.clicBoton(PaginaDialogoVehiculo.obtenerRecursoButonAgregarVehiculo());
     }
 
     @Test
@@ -39,12 +39,13 @@ public class ActividadPrincipalPruebaEspresso {
         String placa = "QWCTR4";
         String cilindraje = "200";
         //Act
-        onView(withId(R.id.btnIngresarVehiculo)).perform(click());
-        onView(withId(R.id.tipoMoto)).perform(click());
-        onView(withId(R.id.placa)).perform(typeText(placa), ViewActions.closeSoftKeyboard());
-        onView(withId(R.id.cilindraje)).perform(typeText(cilindraje), ViewActions.closeSoftKeyboard());
+        //Act
+        PaginaActividadPrincipal.clicBoton(PaginaActividadPrincipal.obtenerRecursoBotonIngresarVehiculo());
+        PaginaDialogoVehiculo.clicBoton(PaginaDialogoVehiculo.obtenerRecursoTipoMoto());
+        PaginaDialogoVehiculo.editarCajaTexto(PaginaDialogoVehiculo.obtenerRecursoCajaTextoPlaca(), placa);
+        PaginaDialogoVehiculo.editarCajaTexto(PaginaDialogoVehiculo.obtenerRecursoCajaTextoCilindraje(), cilindraje);
         //Assert
-        onView(withId(R.id.btnAgregar)).perform(click());
+        PaginaDialogoVehiculo.clicBoton(PaginaDialogoVehiculo.obtenerRecursoButonAgregarVehiculo());
     }
 
 }

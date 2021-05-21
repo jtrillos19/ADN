@@ -1,0 +1,20 @@
+package com.example.adn;
+
+import androidx.test.espresso.action.ViewActions;
+
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.typeText;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
+
+public class EspressoPruebaBase {
+    public static void clicBoton(Integer idRecurso) {
+        onView(withId(idRecurso))
+                .perform(click());
+    }
+
+    public static void editarCajaTexto(Integer idRecurso, String texto) {
+        onView(withId(idRecurso))
+                .perform(typeText(texto), ViewActions.closeSoftKeyboard());
+    }
+}
